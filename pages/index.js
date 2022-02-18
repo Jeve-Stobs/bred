@@ -2,9 +2,10 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 export default function Home({ tenYr, twoYr }) {
-	const tenYearMinustwoYear =
+	const spread =
 		JSON.parse(JSON.stringify(tenYr[tenYr.length - 1].open)) -
 		JSON.parse(JSON.stringify(twoYr[twoYr.length - 1].open))
+	const tenYearTwoYearSpread = round(spread, 3)
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -23,9 +24,11 @@ export default function Home({ tenYr, twoYr }) {
 
 				<div className={styles.grid}>
 					<a href="https://nextjs.org/docs" className={styles.card}>
-						<h2>10yr - 2yr</h2>
+						<h2>Has the yield curve inverted?</h2>
 						<p>
-							<strong>{round(tenYearMinustwoYear, 3)}</strong>
+							<strong>T10Y2Y: {tenYearTwoYearSpread}</strong>
+							<br />
+							<strong>{spread == 0.93 ? "😀 Everything is fine" : spread >= 0.93 ? "😕 We ought to tamp that down" : spread >= 0.3 && spread <= 0.93 ? "😐 This is fine" : "😨 Aw shit"}</strong>
 						</p>
 					</a>
 
