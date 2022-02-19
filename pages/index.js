@@ -66,17 +66,16 @@ export default function Home() {
 					<div className={styles.card}>
 						<h2>Good god, here comes inflation</h2>
 						<p>{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}</p>
+						<br />
+						I&apos;m not even going to argue that
 					</div>
 
-					<a
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-					>
-						<h2>Deploy &rarr;</h2>
-						<p>
-							Instantly deploy your Next.js site to a public URL with Vercel.
-						</p>
-					</a>
+					<div className={styles.card}>
+						<h2>Time for real interest rates</h2>
+						<p>DFII10: {data.realRates}</p>
+						<br />
+						Is that, supposed to be negative? Ah well, it&apos;s is.
+					</div>
 				</div>
 			</main>
 
@@ -97,5 +96,5 @@ export default function Home() {
 }
 
 function getPercentageChange(newNum, oldNum) {
-	return ((newNum - oldNum) / oldNum) * 100;
+	return ((newNum - oldNum) / oldNum) * 100
 }
