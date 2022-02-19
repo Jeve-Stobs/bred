@@ -3,13 +3,13 @@ import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import useSWR from 'swr'
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
 	const { data, error } = useSWR('http://localhost:3001/data', fetcher)
-	if (error) return "An error has occurred."
-	if (!data) return "Loading..."
-	const spread = data.US10Y - data.US02Y;
+	if (error) return 'An error has occurred.'
+	if (!data) return 'Loading...'
+	const spread = data.US10Y - data.US02Y
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -28,7 +28,7 @@ export default function Home() {
 					<div className={styles.card}>
 						<h2>Has the yield curve inverted?</h2>
 						<p>
-							<strong>T10Y2Y: {round(spread, 3)}</strong>
+							<strong>T10Y2Y: {spread.toFixed(2)}</strong>
 							<br />
 							<strong>
 								{spread >= 0.93
@@ -63,13 +63,10 @@ export default function Home() {
 						</p>
 					</div>
 
-					<a
-						href="https://github.com/vercel/next.js/tree/canary/examples"
-						className={styles.card}
-					>
-						<h2>Examples &rarr;</h2>
-						<p>Discover and deploy boilerplate example Next.js projects.</p>
-					</a>
+					<div className={styles.card}>
+						<h2>Good god, here comes inflation</h2>
+						<p>{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}</p>
+					</div>
 
 					<a
 						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -99,10 +96,6 @@ export default function Home() {
 	)
 }
 
-export function round(value, minimumFractionDigits) {
-	const formattedValue = value.toLocaleString('en', {
-		useGrouping: false,
-		minimumFractionDigits
-	})
-	return Number(formattedValue)
+function getPercentageChange(newNum, oldNum) {
+	return ((newNum - oldNum) / oldNum) * 100;
 }
