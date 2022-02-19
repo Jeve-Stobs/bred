@@ -9,30 +9,38 @@ export default function Home({ tenYr, twoYr }) {
 	return (
 		<div className={styles.container}>
 			<Head>
-				<title>Are we fukt? | An analysis of the yield curve</title>
+				<title>Are we fukt? | An of analysis of recessionary indicators</title>
 				<meta name="description" content="I'll put something here laters" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<h1 className={styles.title}>
-					<a>Are we fukt? 😨</a>
-				</h1>
+				<h1 className={styles.title}>Recession? 😨</h1>
 
 				<p className={styles.description}>
 					An of analysis of recessionary indicators.
 				</p>
 
 				<div className={styles.grid}>
-					<a href="https://nextjs.org/docs" className={styles.card}>
+					<p className={styles.card}>
 						<h2>Has the yield curve inverted?</h2>
 						<p>
 							<strong>T10Y2Y: {tenYearTwoYearSpread}</strong>
 							<br />
-							<strong>{spread == 0.93 ? "😀 Everything is fine" : spread >= 0.93 ? "😕 We ought to tamp that down" : spread >= 0.3 && spread <= 0.93 ? "😐 This is fine" : "😨 Aw shit"}</strong>
+							<strong>
+								{spread >= 0.93
+									? "🤩 Wow, that's a lot of growth!"
+									: spread == 0.93
+									? '😀 This predicability is amazing!'
+									: spread >= 0.3 && spread <= 0.93
+									? "😅 I'm not sweating, you're sweating"
+									: spread >= -0.3 && spread <= 0.3
+									? '😨 Aw shit'
+									: "🤮 Shit, you're in a recession"}
+							</strong>
 						</p>
-					</a>
+					</p>
 
-					<a href="https://nextjs.org/learn" className={styles.card}>
+					<a className={styles.card}>
 						<h2>Learn &rarr;</h2>
 						<p>Learn about Next.js in an interactive course with quizzes!</p>
 					</a>
