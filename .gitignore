@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/api/node_modules
+/api/yarn.lock
 /.pnp
 .pnp.js
 
@@ -14,7 +16,7 @@
 
 # production
 /build
-
+/api/data.json
 # misc
 .DS_Store
 *.pem

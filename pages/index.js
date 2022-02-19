@@ -1,11 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
-export default function Home({ tenYr, twoYr }) {
-	const spread =
-		JSON.parse(JSON.stringify(tenYr[tenYr.length - 1].open)) -
-		JSON.parse(JSON.stringify(twoYr[twoYr.length - 1].open))
-	const tenYearTwoYearSpread = round(spread, 3)
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function Home() {
+	const { data, error } = useSWR('http://localhost:3001/data', fetcher)
+	if (error) return "An error has occurred."
+	if (!data) return "Loading..."
+	const spread = data.US10Y - data.US02Y;
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -21,10 +25,10 @@ export default function Home({ tenYr, twoYr }) {
 				</p>
 
 				<div className={styles.grid}>
-					<p className={styles.card}>
+					<div className={styles.card}>
 						<h2>Has the yield curve inverted?</h2>
 						<p>
-							<strong>T10Y2Y: {tenYearTwoYearSpread}</strong>
+							<strong>T10Y2Y: {round(spread, 3)}</strong>
 							<br />
 							<strong>
 								{spread >= 0.93
@@ -38,12 +42,24 @@ export default function Home({ tenYr, twoYr }) {
 									: "🤮 Shit, you're in a recession"}
 							</strong>
 						</p>
-					</p>
+					</div>
 
-					<a className={styles.card}>
-						<h2>Learn &rarr;</h2>
-						<p>Learn about Next.js in an interactive course with quizzes!</p>
-					</a>
+					<div className={styles.card}>
+						<h2>How's unemployment doing?</h2>
+						<p>
+							{data.unemployment} yeah right{' '}
+							<Image
+								src="/jerome.jpg"
+								alt="Vercel Logo"
+								width={38}
+								height={41}
+							/>
+						</p>
+						<br />
+						<p>
+							Let's look at the <i>real</i> numbers
+						</p>
+					</div>
 
 					<a
 						href="https://github.com/vercel/next.js/tree/canary/examples"
@@ -81,22 +97,6 @@ export default function Home({ tenYr, twoYr }) {
 	)
 }
 
-export async function getStaticProps() {
-	const tenYearRes = await fetch(
-		'https://ts-api.cnbc.com/harmony/app/bars/US10Y/1M/20220218000000/20220318000000/adjusted/EST5EDT.json'
-	)
-	const twoYearRes = await fetch(
-		'https://ts-api.cnbc.com/harmony/app/bars/US2Y/1M/20220218000000/20220318000000/adjusted/EST5EDT.json'
-	)
-	const tenYR = await tenYearRes.json()
-	const twoYr = await twoYearRes.json()
-	return {
-		props: {
-			tenYr: tenYR.barData.priceBars || null,
-			twoYr: twoYr.barData.priceBars || null
-		}
-	}
-}
 export function round(value, minimumFractionDigits) {
 	const formattedValue = value.toLocaleString('en', {
 		useGrouping: false,

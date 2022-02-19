@@ -1,0 +1,16 @@
+{
+	"name": "arewefukt-api",
+	"version": "0.1.0",
+	"private": true,
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"watch": "json-server --watch data.json --port 3001"
+	},
+	"dependencies": {
+		"axios": "^0.26.0",
+		"json-server": "^0.17.0",
+		"swr": "^1.2.2",
+		"tradingview-scraper": "^0.3.0"
+	}
+}
