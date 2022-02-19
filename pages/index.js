@@ -58,6 +58,8 @@ export default function Home() {
 						<br />
 						<p>
 							Let&apos;s look at the <i>real</i> numbers
+							<br />
+							{data.realunemployment} that&apos;s more like it
 						</p>
 					</div>
 
