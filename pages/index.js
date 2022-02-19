@@ -45,7 +45,7 @@ export default function Home() {
 					</div>
 
 					<div className={styles.card}>
-						<h2>How's unemployment doing?</h2>
+						<h2>How&apos;s unemployment doing?</h2>
 						<p>
 							{data.unemployment} yeah right{' '}
 							<Image
@@ -57,7 +57,7 @@ export default function Home() {
 						</p>
 						<br />
 						<p>
-							Let's look at the <i>real</i> numbers
+							Let&apos;s look at the <i>real</i> numbers
 						</p>
 					</div>
 
