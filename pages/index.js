@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import useSWR from 'swr'
@@ -12,11 +11,6 @@ export default function Home() {
 	const spread = data.US10Y - data.US02Y
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Are we fukt? | An of analysis of recessionary indicators</title>
-				<meta name="description" content="I'll put something here laters" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
 			<main className={styles.main}>
 				<h1 className={styles.title}>Recession? 😨</h1>
 
@@ -47,7 +41,7 @@ export default function Home() {
 					<div className={styles.card}>
 						<h2>How&apos;s unemployment doing?</h2>
 						<p>
-							{data.unemployment} yeah right{' '}
+							{data.unemployment}% yeah right{' '}
 							<Image
 								src="/jerome.jpg"
 								alt="Vercel Logo"
@@ -58,23 +52,43 @@ export default function Home() {
 						<br />
 						<p>
 							Let&apos;s look at the <i>real</i> numbers
-							<br />
-							{data.realunemployment} that&apos;s more like it
 						</p>
+						<br />
+						<p> {data.realunemployment}% that&apos;s more like it</p>
 					</div>
 
 					<div className={styles.card}>
 						<h2>Good god, here comes inflation</h2>
 						<p>{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}</p>
 						<br />
-						I&apos;m not even going to argue that
+						And {data.cpiNew > data.cpiLastMonth ? 'up' : 'down'}{' '}
+						{getPercentageChange(data.cpiNew, data.cpiLastMonth).toFixed(1)}%{' '}
+						from last month
 					</div>
 
 					<div className={styles.card}>
 						<h2>Time for real interest rates</h2>
 						<p>DFII10: {data.realRates}</p>
 						<br />
-						Is that, supposed to be negative? Ah well, it&apos;s is.
+						That&apos;s{' '}
+						{data.realRates < 0
+							? 'not supposed to be negative'
+							: 'more like it'}
+					</div>
+
+					<div className={styles.card}>
+						<h2>How uncertain are investors of economic policy?</h2>
+						<p>USEPUINDXD: {parseInt(data.policyUncertaintyNew).toFixed(0)}</p>
+						<br />
+						Well that&apos;s{' '}
+						{data.policyUncertaintyNew > data.policyUncertaintyOld
+							? 'up'
+							: 'down'}{' '}
+						{getPercentageChange(
+							data.policyUncertaintyNew,
+							data.policyUncertaintyOld
+						).toFixed(1)}
+						% from yesterday
 					</div>
 				</div>
 			</main>
