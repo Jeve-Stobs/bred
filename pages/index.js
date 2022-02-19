@@ -59,9 +59,13 @@ export default function Home() {
 
 					<div className={styles.card}>
 						<h2>Good god, here comes inflation</h2>
-						<p>{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}</p>
+						<p>
+							{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}% since{' '}
+							{new Date().toLocaleString('default', { month: 'short' })}{' '}
+							{new Date().getFullYear() - 1}
+						</p>
 						<br />
-						And {data.cpiNew > data.cpiLastMonth ? 'up' : 'down'}{' '}
+						{data.cpiNew > data.cpiLastMonth ? 'Up' : 'Down'}{' '}
 						{getPercentageChange(data.cpiNew, data.cpiLastMonth).toFixed(1)}%{' '}
 						from last month
 					</div>
@@ -78,17 +82,31 @@ export default function Home() {
 
 					<div className={styles.card}>
 						<h2>How uncertain are investors of economic policy?</h2>
-						<p>USEPUINDXD: {parseInt(data.policyUncertaintyNew).toFixed(0)}</p>
+						<p>
+							Economic Policy Uncertainty:{' '}
+							{parseInt(data.policyUncertaintyNew).toFixed(0)}
+						</p>
 						<br />
-						Well that&apos;s{' '}
 						{data.policyUncertaintyNew > data.policyUncertaintyOld
-							? 'up'
-							: 'down'}{' '}
+							? 'Up'
+							: 'Down'}{' '}
 						{getPercentageChange(
 							data.policyUncertaintyNew,
 							data.policyUncertaintyOld
 						).toFixed(1)}
 						% from yesterday
+					</div>
+
+					<div className={styles.card}>
+						<h2>Are non-essential employees still employed?</h2>
+						<p>Alcholic Beverage emplyees in CA: {data.alcoholUsageNew}k</p>
+						<br />
+						{data.alcoholUsageNew > data.alcoholUsageOld ? 'Up' : 'Down'}{' '}
+						{getPercentageChange(
+							data.alcoholUsageNew,
+							data.alcoholUsageOld
+						).toFixed(1)}
+						% from last month
 					</div>
 				</div>
 			</main>

@@ -21,6 +21,9 @@ const realRates = axios.get(
 const policyUncertainty = axios.get(
 	'https://api.stlouisfed.org/fred/series/observations?series_id=USEPUINDXD&api_key=efdd93997b860dfcef2d8b0806e110d5&file_type=json'
 )
+const alcoholUsage = axios.get(
+	'https://api.stlouisfed.org/fred/series/observations?series_id=SMU06000004244530001&api_key=efdd93997b860dfcef2d8b0806e110d5&file_type=json'
+)
 Promise.all([
 	US10Y,
 	US02Y,
@@ -28,7 +31,8 @@ Promise.all([
 	realUnemployment,
 	inflation,
 	realRates,
-	policyUncertainty
+	policyUncertainty,
+	alcoholUsage
 ]).then(function (json) {
 	const tenYear = json[0].lp
 	const twoYear = json[1].lp
@@ -43,6 +47,10 @@ Promise.all([
 		json[6].data.observations[json[6].data.observations.length - 1].value
 	const policyUncertaintyOld =
 		json[6].data.observations[json[6].data.observations.length - 2].value
+	const alcoholUsageNew =
+		json[7].data.observations[json[7].data.observations.length - 1].value
+	const alcoholUsageOld =
+		json[7].data.observations[json[7].data.observations.length - 2].value
 	const doota = {
 		US10Y: tenYear,
 		US02Y: twoYear,
@@ -53,7 +61,9 @@ Promise.all([
 		cpiLastMonth: cpiLastMonth,
 		realRates: realRates,
 		policyUncertaintyNew: policyUncertaintyNew,
-		policyUncertaintyOld: policyUncertaintyOld
+		policyUncertaintyOld: policyUncertaintyOld,
+		alcoholUsageNew: alcoholUsageNew,
+		alcoholUsageOld: alcoholUsageOld
 	}
 	const data = '{ "data":' + JSON.stringify(doota) + '}'
 	fs.writeFile('data.json', data, (err) => {
