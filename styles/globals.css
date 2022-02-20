@@ -1,16 +1,23 @@
+@font-face {
+	font-family: bold-text;
+	src: url(/font/f31b2ecb2f8e039d53bd75d5314229c7.woff2) format('woff2');
+}
+@font-face {
+	font-family: light-text;
+	src: url(/font/8b42e3fc6d1d161d6fbd7487babe6cfe.woff2) format('woff2');
+}
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	-webkit-text-size-adjust: none;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }

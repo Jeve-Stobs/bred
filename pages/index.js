@@ -9,124 +9,142 @@ export default function Home() {
 	if (error) return 'An error has occurred.'
 	if (!data) return 'Loading...'
 	const spread = data.US10Y - data.US02Y
+
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
 				<h1 className={styles.title}>Recession? 😨</h1>
 
-				<p className={styles.description}>
-					An of analysis of recessionary indicators.
-				</p>
+				<div className={styles.description}>
+					An analysis of recessionary indicators.
+				</div>
 
 				<div className={styles.grid}>
 					<div className={styles.card}>
-						<h2>Has the yield curve inverted?</h2>
-						<p>
-							<strong>T10Y2Y: {spread.toFixed(2)}</strong>
-							<br />
-							<strong>
-								{spread >= 0.93
-									? "🤩 Wow, that's a lot of growth!"
-									: spread == 0.93
-									? '😀 This predicability is amazing!'
-									: spread >= 0.3 && spread <= 0.93
-									? "😅 I'm not sweating, you're sweating"
-									: spread >= -0.3 && spread <= 0.3
-									? '😨 Aw shit'
-									: "🤮 Shit, you're in a recession"}
-							</strong>
-						</p>
+						<h2 className={styles.card_title}>Has the yield curve inverted?</h2>
+						<span className={styles.info}>
+							T10Y2Y:&nbsp;
+							<span className={styles.green}>{spread.toFixed(2)}%</span>
+						</span>
 					</div>
 
 					<div className={styles.card}>
-						<h2>How&apos;s unemployment doing?</h2>
-						<p>
-							{data.unemployment}% yeah right{' '}
+						<h2 className={styles.card_title}>
+							How&apos;s unemployment doing?
+						</h2>
+						<div className={styles.info}>
+							<span className={styles.green}>{data.unemployment.fudged}%</span>{' '}
+							unemployed
+							<br />
+							<br />
+							More like&nbsp;
+							<span className={styles.green}>
+								{data.unemployment.real}%
+							</span>{' '}
 							<Image
 								src="/jerome.jpg"
 								alt="Vercel Logo"
 								width={38}
 								height={41}
 							/>
-						</p>
-						<br />
-						<p>
-							Let&apos;s look at the <i>real</i> numbers
-						</p>
-						<br />
-						<p> {data.realunemployment}% that&apos;s more like it</p>
+							<br />
+							<br />
+							<span className={styles.card_footer}>
+								{data.unemployment.fudged > data.unemployment.lastMonth
+									? 'Up'
+									: 'Down'}{' '}
+								{getPercentageChange(
+									data.unemployment.fudged,
+									data.unemployment.lastMonth
+								).toFixed(1)}
+								% from last month
+							</span>
+						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2>Good god, here comes inflation</h2>
-						<p>
-							{getPercentageChange(data.cpiNew, data.cpiOld).toFixed(1)}% since{' '}
-							{new Date().toLocaleString('default', { month: 'short' })}{' '}
-							{new Date().getFullYear() - 1}
-						</p>
-						<br />
-						{data.cpiNew > data.cpiLastMonth ? 'Up' : 'Down'}{' '}
-						{getPercentageChange(data.cpiNew, data.cpiLastMonth).toFixed(1)}%{' '}
-						from last month
+						<h2 className={styles.card_title}>
+							Good god, here comes inflation
+						</h2>
+						<div className={styles.info}>
+							<div className={styles.green}>
+								{getPercentageChange(data.cpi.new, data.cpi.old).toFixed(1)}%
+								since {new Date().toLocaleString('default', { month: 'short' })}{' '}
+								{new Date().getFullYear() - 1}
+							</div>
+							<br />
+							<div className={styles.card_footer}>
+								{data.cpi.new > data.cpi.lastMonth ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(data.cpi.new, data.cpi.lastMonth).toFixed(
+									1
+								)}
+								% from last month
+							</div>
+						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2>Time for real interest rates</h2>
-						<p>DFII10: {data.realRates}</p>
-						<br />
-						That&apos;s{' '}
-						{data.realRates < 0
-							? 'not supposed to be negative'
-							: 'more like it'}
+						<h2 className={styles.card_title}>Time for real interest rates</h2>
+						<div className={styles.info}>
+							<div className={styles.green}>DFII10: {data.realRates}%</div>
+							<br />
+							<div className={styles.card_footer}>
+								That&apos;s{' '}
+								{data.realRates < 0
+									? 'not supposed to be negative'
+									: 'more like it'}
+							</div>{' '}
+						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2>How uncertain are investors of economic policy?</h2>
-						<p>
-							Economic Policy Uncertainty:{' '}
-							{parseInt(data.policyUncertaintyNew).toFixed(0)}
-						</p>
-						<br />
-						{data.policyUncertaintyNew > data.policyUncertaintyOld
-							? 'Up'
-							: 'Down'}{' '}
-						{getPercentageChange(
-							data.policyUncertaintyNew,
-							data.policyUncertaintyOld
-						).toFixed(1)}
-						% from yesterday
+						<h2 className={styles.card_title}>
+							How uncertain are investors of economic policy?
+						</h2>
+						<div className={styles.info}>
+							<div className={styles.green}>
+								Economic Policy Uncertainty:{' '}
+								{parseInt(data.policy.new).toFixed(0)}
+							</div>
+							<br />
+							<div className={styles.card_footer}>
+								{data.policy.new > data.policy.old ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(data.policy.new, data.policy.old).toFixed(
+									1
+								)}
+								% from yesterday
+							</div>
+						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2>Are non-essential employees still employed?</h2>
-						<p>Alcholic Beverage emplyees in CA: {data.alcoholUsageNew}k</p>
-						<br />
-						{data.alcoholUsageNew > data.alcoholUsageOld ? 'Up' : 'Down'}{' '}
-						{getPercentageChange(
-							data.alcoholUsageNew,
-							data.alcoholUsageOld
-						).toFixed(1)}
-						% from last month
+						<h2 className={styles.card_title}>
+							Are non-essential employees still employed?
+						</h2>
+						<div className={styles.info}>
+							<div>Alcholic Beverage emplyees in CA: {data.alcohol.new}k</div>
+							<br />
+							<div className={styles.card_footer}>
+								{data.alcohol.new > data.alcohol.old ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.alcohol.new,
+									data.alcohol.old
+								).toFixed(1)}
+								% from last month
+							</div>{' '}
+						</div>
 					</div>
 				</div>
 			</main>
 
 			<footer className={styles.footer}>
-				<a
-					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Powered by{' '}
-					<span className={styles.logo}>
-						<Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-					</span>
-				</a>
+				a jevestobs project&nbsp;|&nbsp;
+				<i className={styles.footer_info}>Refreshes every 3 minutes</i>
 			</footer>
 		</div>
 	)
 }
 
 function getPercentageChange(newNum, oldNum) {
-	return ((newNum - oldNum) / oldNum) * 100
+	return Math.abs(((newNum - oldNum) / oldNum) * 100)
 }

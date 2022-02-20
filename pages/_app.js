@@ -9,7 +9,7 @@ function App({ Component, pageProps }) {
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 				/>
-				<title>Are we fukt? | An of analysis of recessionary indicators</title>
+				<title>Are we fukt? | An analysis of recessionary indicators</title>
 				<link rel="preconnect" href="http://localhost:3001" />
 				<link rel="dns-prefetch" href="http://localhost:3001" />
 				<meta name="description" content="I'll put something here laters" />
