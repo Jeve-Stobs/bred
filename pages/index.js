@@ -1,13 +1,14 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import useSWR from 'swr'
-
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
-	const { data, error } = useSWR('http://localhost:3001/data', fetcher)
+	const { data, error } = useSWR('http://localhost:3001/data', fetcher, {
+		refreshInterval: 5000
+	})
 	if (error) return 'An error has occurred.'
-	if (!data) return 'Loading...'
+	if (!data) return
 	const spread = data.US10Y.value - data.US02Y.value
 	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
 
@@ -31,8 +32,10 @@ export default function Home() {
 						<br />
 						<span className={styles.card_footer}>
 							{spread > previous_spread_close ? 'Up' : 'Down'}{' '}
-							{getPercentageChange(spread, previous_spread_close).toFixed(1)}%
-							from yesterday
+							{getPercentageChange(spread, previous_spread_close, true).toFixed(
+								1
+							)}
+							% from yesterday
 						</span>
 					</div>
 
@@ -63,7 +66,8 @@ export default function Home() {
 									: 'Down'}{' '}
 								{getPercentageChange(
 									data.unemployment.fudged,
-									data.unemployment.lastMonth
+									data.unemployment.lastMonth,
+									true
 								).toFixed(1)}
 								% from last month
 							</span>
@@ -84,9 +88,11 @@ export default function Home() {
 							<br />
 							<div className={styles.card_footer}>
 								{data.cpi.new > data.cpi.lastMonth ? 'Up' : 'Down'}{' '}
-								{getPercentageChange(data.cpi.new, data.cpi.lastMonth).toFixed(
-									1
-								)}
+								{getPercentageChange(
+									data.cpi.new,
+									data.cpi.lastMonth,
+									true
+								).toFixed(1)}
 								% from last month
 							</div>
 						</div>
@@ -103,7 +109,8 @@ export default function Home() {
 								{data.realRates.old > data.realRates.new ? 'Up' : 'Down'}{' '}
 								{getPercentageChange(
 									data.realRates.new,
-									data.realRates.old
+									data.realRates.old,
+									true
 								).toFixed(1)}
 								% from yesterday
 							</div>{' '}
@@ -123,9 +130,11 @@ export default function Home() {
 							<br />
 							<div className={styles.card_footer}>
 								{data.policy.new > data.policy.old ? 'Up' : 'Down'}{' '}
-								{getPercentageChange(data.policy.new, data.policy.old).toFixed(
-									1
-								)}
+								{getPercentageChange(
+									data.policy.new,
+									data.policy.old,
+									true
+								).toFixed(1)}
 								% from yesterday
 							</div>
 						</div>
@@ -144,7 +153,8 @@ export default function Home() {
 								{data.alcohol.new > data.alcohol.old ? 'Up' : 'Down'}{' '}
 								{getPercentageChange(
 									data.alcohol.new,
-									data.alcohol.old
+									data.alcohol.old,
+									true
 								).toFixed(1)}
 								% from last month
 							</div>{' '}
@@ -161,6 +171,9 @@ export default function Home() {
 	)
 }
 
-function getPercentageChange(newNum, oldNum) {
-	return Math.abs(((newNum - oldNum) / oldNum) * 100)
+function getPercentageChange(newNum, oldNum, absolute) {
+	if (absolute) {
+		return Math.abs(((newNum - oldNum) / oldNum) * 100)
+	}
+	return ((newNum - oldNum) / oldNum) * 100
 }

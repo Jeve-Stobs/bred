@@ -12,6 +12,12 @@ function App({ Component, pageProps }) {
 				<title>Are we fukt? | An analysis of recessionary indicators</title>
 				<link rel="preconnect" href="http://localhost:3001" />
 				<link rel="dns-prefetch" href="http://localhost:3001" />
+				<link
+					rel="preload"
+					href="http://localhost:3001/data"
+					as="fetch"
+					crossorigin="anonymous"
+				/>
 				<meta name="description" content="I'll put something here laters" />
 				<link rel="icon" href="/favicon.ico" />
 				<meta
