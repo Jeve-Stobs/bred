@@ -8,7 +8,8 @@ export default function Home() {
 	const { data, error } = useSWR('http://localhost:3001/data', fetcher)
 	if (error) return 'An error has occurred.'
 	if (!data) return 'Loading...'
-	const spread = data.US10Y - data.US02Y
+	const spread = data.US10Y.value - data.US02Y.value
+	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
 
 	return (
 		<div className={styles.container}>
@@ -25,6 +26,13 @@ export default function Home() {
 						<span className={styles.info}>
 							T10Y2Y:&nbsp;
 							<span className={styles.green}>{spread.toFixed(2)}%</span>
+						</span>
+						<br />
+						<br />
+						<span className={styles.card_footer}>
+							{spread > previous_spread_close ? 'Up' : 'Down'}{' '}
+							{getPercentageChange(spread, previous_spread_close).toFixed(1)}%
+							from yesterday
 						</span>
 					</div>
 
@@ -67,11 +75,12 @@ export default function Home() {
 							Good god, here comes inflation
 						</h2>
 						<div className={styles.info}>
-							<div className={styles.green}>
+							<span className={styles.green}>
 								{getPercentageChange(data.cpi.new, data.cpi.old).toFixed(1)}%
-								since {new Date().toLocaleString('default', { month: 'short' })}{' '}
-								{new Date().getFullYear() - 1}
-							</div>
+							</span>{' '}
+							since {new Date().toLocaleString('default', { month: 'short' })}{' '}
+							{new Date().getFullYear() - 1}
+							<br />
 							<br />
 							<div className={styles.card_footer}>
 								{data.cpi.new > data.cpi.lastMonth ? 'Up' : 'Down'}{' '}
@@ -86,13 +95,17 @@ export default function Home() {
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>Time for real interest rates</h2>
 						<div className={styles.info}>
-							<div className={styles.green}>DFII10: {data.realRates}%</div>
+							Real rates:{' '}
+							<span className={styles.green}>{data.realRates.new}%</span>
+							<br />
 							<br />
 							<div className={styles.card_footer}>
-								That&apos;s{' '}
-								{data.realRates < 0
-									? 'not supposed to be negative'
-									: 'more like it'}
+								{data.realRates.old > data.realRates.new ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.realRates.new,
+									data.realRates.old
+								).toFixed(1)}
+								% from yesterday
 							</div>{' '}
 						</div>
 					</div>
@@ -102,10 +115,11 @@ export default function Home() {
 							How uncertain are investors of economic policy?
 						</h2>
 						<div className={styles.info}>
-							<div className={styles.green}>
-								Economic Policy Uncertainty:{' '}
+							Economic Policy Uncertainty:{' '}
+							<span className={styles.green}>
 								{parseInt(data.policy.new).toFixed(0)}
-							</div>
+							</span>
+							<br />
 							<br />
 							<div className={styles.card_footer}>
 								{data.policy.new > data.policy.old ? 'Up' : 'Down'}{' '}
@@ -122,7 +136,9 @@ export default function Home() {
 							Are non-essential employees still employed?
 						</h2>
 						<div className={styles.info}>
-							<div>Alcholic Beverage emplyees in CA: {data.alcohol.new}k</div>
+							Adult beverage emplyees in CA:{' '}
+							<span className={styles.green}>{data.alcohol.new}k</span>
+							<br />
 							<br />
 							<div className={styles.card_footer}>
 								{data.alcohol.new > data.alcohol.old ? 'Up' : 'Down'}{' '}

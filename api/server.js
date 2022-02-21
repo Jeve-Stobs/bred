@@ -27,7 +27,9 @@ const h = axios.get(
 )
 Promise.all([a, b, c, d, e, f, g, h]).then(function (json) {
 	const a = json[0].lp
+	const a1 = json[0].prev_close_price
 	const b = json[1].lp
+	const b1 = json[1].prev_close_price
 	const c = json[2].data.Results.series[0].data[0].value
 	const d = json[3].data.Results.series[0].data[0].value
 	const e = json[4].data.Results.series[0].data[0].value
@@ -35,6 +37,8 @@ Promise.all([a, b, c, d, e, f, g, h]).then(function (json) {
 	const g = json[4].data.Results.series[0].data[1].value
 	const h =
 		json[5].data.observations[json[5].data.observations.length - 1].value
+	const h1 =
+		json[5].data.observations[json[5].data.observations.length - 2].value
 	const i =
 		json[6].data.observations[json[6].data.observations.length - 1].value
 	const j =
@@ -45,8 +49,14 @@ Promise.all([a, b, c, d, e, f, g, h]).then(function (json) {
 		json[7].data.observations[json[7].data.observations.length - 2].value
 	const m = json[2].data.Results.series[0].data[1].value
 	const index = {
-		US10Y: a,
-		US02Y: b,
+		US10Y: {
+			value: a,
+			previous: a1
+		},
+		US02Y: {
+			value: b,
+			previous: b1
+		},
 		unemployment: {
 			fudged: c,
 			real: d,
@@ -57,7 +67,10 @@ Promise.all([a, b, c, d, e, f, g, h]).then(function (json) {
 			old: f,
 			lastMonth: g
 		},
-		realRates: h,
+		realRates: {
+			new: h,
+			old: h1
+		},
 		policy: {
 			new: i,
 			old: j
