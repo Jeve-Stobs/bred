@@ -10,13 +10,13 @@ function App({ Component, pageProps }) {
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 				/>
 				<title>Are we fukt? | An analysis of recessionary indicators</title>
-				<link rel="preconnect" href="http://localhost:3001" />
-				<link rel="dns-prefetch" href="http://localhost:3001" />
+				<link rel="preconnect" href="http://localhost:3002" />
+				<link rel="dns-prefetch" href="http://localhost:3002" />
 				<link
 					rel="preload"
-					href="http://localhost:3001/data"
+					href="http://localhost:3002/api/data"
 					as="fetch"
-					crossorigin="anonymous"
+					crossOrigin="anonymous"
 				/>
 				<meta name="description" content="I'll put something here laters" />
 				<link rel="icon" href="/favicon.ico" />

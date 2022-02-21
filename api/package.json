@@ -4,13 +4,13 @@
 	"private": true,
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js",
-		"watch": "json-server --watch data.json --port 3001"
+		"start": "node index.js",
+		"watch": "node server.js"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dotenv": "^16.0.0",
-		"json-server": "^0.17.0",
+		"express": "^4.17.3",
 		"tradingview-scraper": "^0.3.0"
 	}
 }
