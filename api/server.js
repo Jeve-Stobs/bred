@@ -1,7 +1,11 @@
 const express = require('express')
 const data = require('./data.json')
-const app = express()
+const cors = require('cors')
 const port = 3002
+
+const app = express()
+
+app.use(cors())
 
 app.listen(port, function (err) {
 	if (err) {
