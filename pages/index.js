@@ -136,7 +136,7 @@ export default function Home() {
 							Are non-essential employees still employed?
 						</h2>
 						<div className={styles.info}>
-							Adult beverage emplyees in CA:{' '}
+							Adult beverage employees in CA:{' '}
 							<span className={styles.green}>{data.alcohol.new}k</span>
 							<br />
 							<br />
