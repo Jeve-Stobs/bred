@@ -20,11 +20,14 @@ function App({ Component, pageProps }) {
 					as="fetch"
 					crossOrigin="anonymous"
 				/>
-				<meta name="description" content="I'll put something here laters" />
+				<meta
+					name="description"
+					content="A content aggregation tool build to gauge the health of financial markets"
+				/>
 				<link rel="shortcut icon" href="/images/favicon.ico" />
 				<meta
 					property="og:title"
-					content="Are we fukt? | An of analysis of recessionary indicators"
+					content="Is the party over? | An of analysis of recessionary indicators"
 				/>
 				<meta property="og:locale" content="en_US" />
 				<meta property="og:url" content="https://jevestobs.dev" />
@@ -37,16 +40,16 @@ function App({ Component, pageProps }) {
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
-					content="I'll put something here laters"
+					content="A content aggregation tool build to gauge the health of financial markets"
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta
 					name="twitter:title"
-					content="Are we fukt? | An of analysis of recessionary indicators"
+					content="Is the party over? | An of analysis of recessionary indicators"
 				/>
 				<meta
 					name="twitter:description"
-					content="I'll put something here laters"
+					content="A content aggregation tool build to gauge the health of financial markets"
 				/>
 				<meta
 					name="twitter:image"
