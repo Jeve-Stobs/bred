@@ -15,7 +15,15 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
-				<h1 className={styles.title}>Recession? 😨</h1>
+				<h1 className={styles.title}>
+					Is the party over?{' '}
+					<Image
+						src="/866844599984848906.png"
+						alt="Partying worried"
+						width={64}
+						height={64}
+					/>
+				</h1>
 
 				<div className={styles.description}>
 					An analysis of recessionary indicators.
@@ -54,7 +62,7 @@ export default function Home() {
 							</span>{' '}
 							<Image
 								src="/jerome.jpg"
-								alt="Vercel Logo"
+								alt="Jerome Powell Laughing"
 								width={38}
 								height={41}
 							/>
@@ -165,7 +173,9 @@ export default function Home() {
 
 			<footer className={styles.footer}>
 				a jevestobs project&nbsp;|&nbsp;
-				<i className={styles.footer_info}>Refreshes every 3 minutes</i>
+				<i className={styles.footer_info}>
+					Automatically refreshes every 3 minutes
+				</i>
 			</footer>
 		</div>
 	)

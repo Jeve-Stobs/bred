@@ -21,7 +21,7 @@
 	font-family: bold-text;
 }
 .footer_info {
-	font-size: 0.8rem;
+	font-size: 0.95rem;
 	color: grey;
 	font-style: oblique;
 	font-family: light-text;
@@ -83,6 +83,7 @@
 }
 .card_title {
 	font-family: bold-text;
+	font-size: 1.3rem;
 }
 .card_footer {
 	color: grey;
