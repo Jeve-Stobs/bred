@@ -15,15 +15,7 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
-				<h1 className={styles.title}>
-					Is the party over?{' '}
-					<Image
-						src="/images/partying_worried.png"
-						alt="Partying worried"
-						width={64}
-						height={64}
-					/>
-				</h1>
+				<h1 className={styles.title}>Is the party over?</h1>
 
 				<div className={styles.description}>
 					An analysis of recessionary indicators.
@@ -57,15 +49,7 @@ export default function Home() {
 							<br />
 							<br />
 							More like&nbsp;
-							<span className={styles.green}>
-								{data.unemployment.real}%
-							</span>{' '}
-							<Image
-								src="/images/jerome.jpg"
-								alt="Jerome Powell Laughing"
-								width={38}
-								height={41}
-							/>
+							<span className={styles.green}>{data.unemployment.real}%</span>
 							<br />
 							<br />
 							<span className={styles.card_footer}>
