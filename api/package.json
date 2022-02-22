@@ -2,7 +2,7 @@
 	"name": "arewefukt-api",
 	"version": "0.1.0",
 	"private": true,
-	"main": "server.js",
+	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
 		"watch": "json-server --watch data.json --port 3002"
