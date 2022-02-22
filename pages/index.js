@@ -18,7 +18,7 @@ export default function Home() {
 				<h1 className={styles.title}>
 					Is the party over?{' '}
 					<Image
-						src="/866844599984848906.png"
+						src="/images/partying_worried.png"
 						alt="Partying worried"
 						width={64}
 						height={64}
@@ -61,7 +61,7 @@ export default function Home() {
 								{data.unemployment.real}%
 							</span>{' '}
 							<Image
-								src="/jerome.jpg"
+								src="/images/jerome.jpg"
 								alt="Jerome Powell Laughing"
 								width={38}
 								height={41}

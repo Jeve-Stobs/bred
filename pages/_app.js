@@ -21,14 +21,17 @@ function App({ Component, pageProps }) {
 					crossOrigin="anonymous"
 				/>
 				<meta name="description" content="I'll put something here laters" />
-				<link rel="icon" href="https://partysover.vercel.app/favicon.ico" />
+				<link rel="shortcut icon" href="/images/favicon.ico" />
 				<meta
 					property="og:title"
 					content="Are we fukt? | An of analysis of recessionary indicators"
 				/>
 				<meta property="og:locale" content="en_US" />
 				<meta property="og:url" content="https://jevestobs.dev" />
-				<meta property="og:image" content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg" />
+				<meta
+					property="og:image"
+					content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg"
+				/>
 				<meta property="og:image:width" content="120" />
 				<meta property="og:image:height" content="108" />
 				<meta property="og:type" content="website" />
@@ -45,7 +48,10 @@ function App({ Component, pageProps }) {
 					name="twitter:description"
 					content="I'll put something here laters"
 				/>
-				<meta name="twitter:image" content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg" />
+				<meta
+					name="twitter:image"
+					content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg"
+				/>
 				<meta
 					name="Keywords"
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
