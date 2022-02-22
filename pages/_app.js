@@ -14,7 +14,7 @@ function App({ Component, pageProps }) {
 				<link rel="dns-prefetch" href="http://localhost:3002" />
 				<link
 					rel="preload"
-					href="http://localhost:3002/api/data"
+					href="http://localhost:3002/data"
 					as="fetch"
 					crossOrigin="anonymous"
 				/>

@@ -5,13 +5,14 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node index.js",
-		"watch": "node server.js"
+		"watch": "json-server --watch data.json --port 3002"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
-		"cors": "^2.8.5",
 		"dotenv": "^16.0.0",
-		"express": "^4.17.3",
+		"json-server": "^0.17.0",
+		"node-cron": "^3.0.0",
+		"shelljs": "^0.8.5",
 		"tradingview-scraper": "^0.3.0"
 	}
 }

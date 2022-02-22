@@ -1,20 +1,9 @@
-const express = require('express')
-const data = require('./data.json')
-const cors = require('cors')
-const port = 3002
-
-const app = express()
-
-app.use(cors())
-
-app.listen(port, function (err) {
-	if (err) {
-		console.log('Error while starting server')
+const cron = require('node-cron')
+const shell = require('shelljs')
+cron.schedule('*/10 * * * * *', function () {
+	if (shell.exec('node index.js').code !== 0) {
+		shell.exit(1)
 	} else {
-		console.log('Server has been started at %d', port)
+		shell.echo('Database backup complete')
 	}
-})
-
-app.get('/api/data', function (req, res) {
-	res.json(data)
 })
