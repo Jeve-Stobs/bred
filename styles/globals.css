@@ -1,10 +1,12 @@
 @font-face {
 	font-family: bold-text;
 	src: url(/font/f31b2ecb2f8e039d53bd75d5314229c7.woff2) format('woff2');
+	font-display: swap;
 }
 @font-face {
 	font-family: light-text;
 	src: url(/font/8b42e3fc6d1d161d6fbd7487babe6cfe.woff2) format('woff2');
+	font-display: swap;
 }
 html,
 body {
