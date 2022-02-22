@@ -89,4 +89,4 @@ function getData() {
 		})
 	})
 }
-setInterval(getData, 180000)
+setInterval(getData, 1000)
