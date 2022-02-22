@@ -17,7 +17,6 @@
 # production
 /build
 /api/data.json
-/api/.env
 # misc
 .DS_Store
 *.pem
