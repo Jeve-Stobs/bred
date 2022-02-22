@@ -12,11 +12,11 @@ function App({ Component, pageProps }) {
 				<title>
 					Is the party over? | An analysis of recessionary indicators
 				</title>
-				<link rel="preconnect" href="http://localhost:3002" />
-				<link rel="dns-prefetch" href="http://localhost:3002" />
+				<link rel="preconnect" href="https://api.jevestobs.dev/data" />
+				<link rel="dns-prefetch" href="https://api.jevestobs.dev/data" />
 				<link
 					rel="preload"
-					href="http://localhost:3002/data"
+					href="https://api.jevestobs.dev/data"
 					as="fetch"
 					crossOrigin="anonymous"
 				/>
