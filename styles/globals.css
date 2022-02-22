@@ -1,3 +1,6 @@
+::-webkit-scrollbar {
+	width: 0;
+}
 @font-face {
 	font-family: bold-text;
 	src: url(/font/f31b2ecb2f8e039d53bd75d5314229c7.woff2) format('woff2');
