@@ -31,12 +31,6 @@ function App({ Component, pageProps }) {
 				/>
 				<meta property="og:locale" content="en_US" />
 				<meta property="og:url" content="https://jevestobs.dev" />
-				<meta
-					property="og:image"
-					content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg"
-				/>
-				<meta property="og:image:width" content="120" />
-				<meta property="og:image:height" content="108" />
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
