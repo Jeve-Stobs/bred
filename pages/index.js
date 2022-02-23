@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import useSWR from 'swr'
+import Link from 'next/link'
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
@@ -199,7 +200,9 @@ export default function Home() {
 			</main>
 
 			<footer className={styles.footer}>
-				a jevestobs project&nbsp;|&nbsp;
+				<Link href="https://jevestobs.dev" passHref>
+					a jevestobs project&nbsp;|&nbsp;
+				</Link>
 				<i className={styles.footer_info}>
 					Automatically refreshes every 3 minutes
 				</i>
