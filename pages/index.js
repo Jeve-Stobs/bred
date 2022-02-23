@@ -3,7 +3,7 @@ import useSWR from 'swr'
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher, {
+	const { data, error } = useSWR('http://localhost:3002/data', fetcher, {
 		refreshInterval: 5000
 	})
 	if (error) return 'An error has occurred.'
@@ -151,6 +151,50 @@ export default function Home() {
 							</div>{' '}
 						</div>
 					</div>
+					<div className={styles.card}>
+						<h2 className={styles.card_title}>
+							How many people are leaving their jobs?
+						</h2>
+						<div className={styles.info}>
+							Initial claims:{' '}
+							<span className={styles.green}>
+								{new String(data.claims.new).substring(0, 3)}k
+							</span>
+							<br />
+							<br />
+							<div className={styles.card_footer}>
+								{data.claims.new > data.claims.old ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.claims.new,
+									data.claims.old,
+									true
+								).toFixed(1)}
+								% since last Saturday
+							</div>{' '}
+						</div>
+					</div>
+					<div className={styles.card}>
+						<h2 className={styles.card_title}>
+							How many people are contributing to the economy?
+						</h2>
+						<div className={styles.info}>
+							Total Nonfarm Payroll:{' '}
+							<span className={styles.green}>
+								{new String(data.payroll.new).substring(0, 3)}k
+							</span>
+							<br />
+							<br />
+							<div className={styles.card_footer}>
+								{data.payroll.new > data.payroll.old ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.payroll.new,
+									data.payroll.old,
+									true
+								).toFixed(1)}
+								% from last month
+							</div>{' '}
+						</div>
+					</div>
 				</div>
 			</main>
 
@@ -169,4 +213,8 @@ function getPercentageChange(newNum, oldNum, absolute) {
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}
 	return ((newNum - oldNum) / oldNum) * 100
+}
+
+function format(num) {
+	return new Intl.NumberFormat().format(num)
 }

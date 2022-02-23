@@ -25,7 +25,13 @@ function getData() {
 	const h = axios.get(
 		`https://api.stlouisfed.org/fred/series/observations?series_id=SMU06000004244530001&api_key=${process.env.FRED_API_KEY}&file_type=json`
 	)
-	Promise.all([a, b, c, d, e, f, g, h]).then(function (json) {
+	const i = axios.get(
+		`https://api.stlouisfed.org/fred/series/observations?series_id=ICSA&api_key=${process.env.FRED_API_KEY}&file_type=json`
+	)
+	const j = axios.get(
+		`https://api.stlouisfed.org/fred/series/observations?series_id=PAYEMS&api_key=${process.env.FRED_API_KEY}&file_type=json`
+	)
+	Promise.all([a, b, c, d, e, f, g, h, i, j]).then(function (json) {
 		const a = json[0].lp
 		const a1 = json[0].prev_close_price
 		const b = json[1].lp
@@ -48,6 +54,14 @@ function getData() {
 		const l =
 			json[7].data.observations[json[7].data.observations.length - 2].value
 		const m = json[2].data.Results.series[0].data[1].value
+		const n =
+			json[8].data.observations[json[8].data.observations.length - 1].value
+		const o =
+			json[8].data.observations[json[8].data.observations.length - 2].value
+		const p =
+			json[9].data.observations[json[9].data.observations.length - 1].value
+		const q =
+			json[9].data.observations[json[9].data.observations.length - 2].value
 		const index = {
 			US10Y: {
 				value: a,
@@ -78,6 +92,14 @@ function getData() {
 			alcohol: {
 				new: k,
 				old: l
+			},
+			claims: {
+				new: n,
+				old: o
+			},
+			payroll: {
+				new: p,
+				old: q
 			}
 		}
 		const data = '{ "data":' + JSON.stringify(index) + '}'
@@ -89,4 +111,4 @@ function getData() {
 		})
 	})
 }
-setInterval(getData, 180000)
+setInterval(getData, 1000)
