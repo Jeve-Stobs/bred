@@ -44,7 +44,7 @@ function App({ Component, pageProps }) {
 					content="Is the party over? | An of analysis of recessionary indicators"
 				/>
 				<meta property="og:locale" content="en_US" />
-				<meta property="og:url" content="https://capitulation.jevestobs.dev" />
+				<meta property="og:url" content="https://fred.jevestobs.dev" />
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
