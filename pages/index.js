@@ -217,7 +217,3 @@ function getPercentageChange(newNum, oldNum, absolute) {
 	}
 	return ((newNum - oldNum) / oldNum) * 100
 }
-
-function format(num) {
-	return new Intl.NumberFormat().format(num)
-}
