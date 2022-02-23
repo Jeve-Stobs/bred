@@ -36,7 +36,7 @@ function App({ Component, pageProps }) {
 				/>
 				<meta
 					name="description"
-					content="A content aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool build to gauge the health of financial markets"
 				/>
 				<link rel="shortcut icon" href="/images/favicon.ico" />
 				<meta
@@ -44,11 +44,11 @@ function App({ Component, pageProps }) {
 					content="Is the party over? | An of analysis of recessionary indicators"
 				/>
 				<meta property="og:locale" content="en_US" />
-				<meta property="og:url" content="https://jevestobs.dev" />
+				<meta property="og:url" content="https://capitulation.jevestobs.dev" />
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
-					content="A content aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool build to gauge the health of financial markets"
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta
@@ -57,11 +57,11 @@ function App({ Component, pageProps }) {
 				/>
 				<meta
 					name="twitter:description"
-					content="A content aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool build to gauge the health of financial markets"
 				/>
 				<meta
 					name="twitter:image"
-					content="https://cms.qz.com/wp-content/uploads/2018/07/Jerome_Powell-Face.jpg"
+					content="/images/fredgraph.png"
 				/>
 				<meta
 					name="Keywords"
