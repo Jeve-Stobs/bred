@@ -26,7 +26,9 @@ export default function Home() {
 						<h2 className={styles.card_title}>Has the yield curve inverted?</h2>
 						<span className={styles.info}>
 							T10Y2Y:&nbsp;
-							<span className={styles.green}>{spread.toFixed(2)}%</span>
+							<span className={getClassName(spread, previous_spread_close)}>
+								{spread.toFixed(2)}%
+							</span>
 						</span>
 						<br />
 						<br />
@@ -44,12 +46,26 @@ export default function Home() {
 							How&apos;s unemployment doing?
 						</h2>
 						<div className={styles.info}>
-							<span className={styles.green}>{data.unemployment.fudged}%</span>{' '}
+							<span
+								className={getClassName(
+									data.unemployment.real,
+									data.unemployment.lastMonth
+								)}
+							>
+								{data.unemployment.fudged}%
+							</span>{' '}
 							unemployed
 							<br />
 							<br />
 							More like&nbsp;
-							<span className={styles.green}>{data.unemployment.real}%</span>
+							<span
+								className={getClassName(
+									data.unemployment.real,
+									data.unemployment.lastMonth
+								)}
+							>
+								{data.unemployment.real}%
+							</span>
 							<br />
 							<br />
 							<span className={styles.card_footer}>
@@ -71,7 +87,7 @@ export default function Home() {
 							Good god, here comes inflation
 						</h2>
 						<div className={styles.info}>
-							<span className={styles.green}>
+							<span className={getClassName(data.cpi.new, data.cpi.old)}>
 								{getPercentageChange(data.cpi.new, data.cpi.old).toFixed(1)}%
 							</span>{' '}
 							since {new Date().toLocaleString('default', { month: 'short' })}{' '}
@@ -94,11 +110,20 @@ export default function Home() {
 						<h2 className={styles.card_title}>Time for real interest rates</h2>
 						<div className={styles.info}>
 							Real rates:{' '}
-							<span className={styles.green}>{data.realRates.new}%</span>
+							<span
+								className={getClassName(
+									Math.abs(data.realRates.new),
+									Math.abs(data.realRates.old)
+								)}
+							>
+								{data.realRates.new}%
+							</span>
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.realRates.old > data.realRates.new ? 'Up' : 'Down'}{' '}
+								{Math.abs(data.realRates.new) > Math.abs(data.realRates.old)
+									? 'Up'
+									: 'Down'}{' '}
 								{getPercentageChange(
 									data.realRates.new,
 									data.realRates.old,
@@ -115,7 +140,7 @@ export default function Home() {
 						</h2>
 						<div className={styles.info}>
 							Economic Policy Uncertainty:{' '}
-							<span className={styles.green}>
+							<span className={getClassName(data.policy.new, data.policy.old)}>
 								{parseInt(data.policy.new).toFixed(0)}
 							</span>
 							<br />
@@ -138,7 +163,11 @@ export default function Home() {
 						</h2>
 						<div className={styles.info}>
 							Adult beverage employees in CA:{' '}
-							<span className={styles.green}>{data.alcohol.new}k</span>
+							<span
+								className={getClassName(data.alcohol.new, data.alcohol.old)}
+							>
+								{data.alcohol.new}k
+							</span>
 							<br />
 							<br />
 							<div className={styles.card_footer}>
@@ -158,7 +187,7 @@ export default function Home() {
 						</h2>
 						<div className={styles.info}>
 							Initial claims:{' '}
-							<span className={styles.green}>
+							<span className={getClassName(data.claims.new, data.claims.old)}>
 								{new String(data.claims.new).substring(0, 3)}k
 							</span>
 							<br />
@@ -180,7 +209,9 @@ export default function Home() {
 						</h2>
 						<div className={styles.info}>
 							Total Nonfarm Payroll:{' '}
-							<span className={styles.green}>
+							<span
+								className={getClassName(data.payroll.new, data.payroll.old)}
+							>
 								{new String(data.payroll.new).substring(0, 3)}k
 							</span>
 							<br />
@@ -216,4 +247,11 @@ function getPercentageChange(newNum, oldNum, absolute) {
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}
 	return ((newNum - oldNum) / oldNum) * 100
+}
+
+function getClassName(a, b) {
+	if (a > b) {
+		return styles.green
+	}
+	return styles.red
 }
