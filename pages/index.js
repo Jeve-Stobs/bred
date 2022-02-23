@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import Image from 'next/image'
 import useSWR from 'swr'
 const fetcher = (url) => fetch(url).then((res) => res.json())
 

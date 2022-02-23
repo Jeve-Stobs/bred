@@ -59,10 +59,7 @@ function App({ Component, pageProps }) {
 					name="twitter:description"
 					content="A data aggregation tool build to gauge the health of financial markets"
 				/>
-				<meta
-					name="twitter:image"
-					content="/images/fredgraph.png"
-				/>
+				<meta name="twitter:image" content="/images/fredgraph.png" />
 				<meta
 					name="Keywords"
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
