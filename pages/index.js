@@ -25,7 +25,7 @@ export default function Home() {
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>Has the yield curve inverted?</h2>
 						<span className={styles.info}>
-							T10Y2Y:&nbsp;
+							10Y minus 2Y:&nbsp;
 							<span className={getClassName(spread, previous_spread_close)}>
 								{spread.toFixed(2)}%
 							</span>
@@ -250,8 +250,5 @@ function getPercentageChange(newNum, oldNum, absolute) {
 }
 
 function getClassName(a, b) {
-	if (a > b) {
-		return styles.green
-	}
-	return styles.red
+	return a > b ? styles.green : styles.red
 }
