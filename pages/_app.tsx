@@ -1,10 +1,13 @@
 import '../styles/globals.css'
-import Head from 'next/head'
+import { AppProps } from 'next/app';
+import Head from 'next/head';
 
-function App({ Component, pageProps }) {
-	return (
-		<>
-			<Head>
+export default function App(props: AppProps) {
+  const { Component, pageProps } = props;
+
+  return (
+    <>
+      <Head>
 				<meta
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
@@ -65,14 +68,7 @@ function App({ Component, pageProps }) {
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
 				/>
 			</Head>
-			<div className="container">
-				<Component {...pageProps} />
-			</div>
-		</>
-	)
-}
-
-export default App
-export function reportWebVitals(metric) {
-	console.log(metric)
+        <Component {...pageProps} />
+    </>
+  );
 }

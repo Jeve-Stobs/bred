@@ -17,8 +17,11 @@
 		"swr": "^1.2.2"
 	},
 	"devDependencies": {
+		"@types/node": "17.0.21",
+		"@types/react": "17.0.39",
 		"eslint": "8.9.0",
 		"eslint-config-next": "12.1.0",
-		"prettier": "^2.5.1"
+		"prettier": "^2.5.1",
+		"typescript": "4.5.5"
 	}
 }

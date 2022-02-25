@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/api/node_modules
-/api/yarn.lock
 /.pnp
 .pnp.js
 
@@ -16,7 +14,9 @@
 
 # production
 /build
+/api/node_modules
 /api/data.json
+
 # misc
 .DS_Store
 *.pem
@@ -35,3 +35,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# typescript
+*.tsbuildinfo

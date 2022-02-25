@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	generateBuildId: () => 'build',
 	distDir: 'build',
 	reactStrictMode: true,
@@ -9,3 +10,5 @@ module.exports = {
 		scrollRestoration: true
 	}
 }
+
+module.exports = nextConfig

@@ -1,14 +1,14 @@
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next'
 import useSWR from 'swr'
 import Link from 'next/link'
-const fetcher = (url) => fetch(url).then((res) => res.json())
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher, {
-		refreshInterval: 5000
-	})
-	if (error) return 'An error has occurred.'
-	if (!data) return
+
+const Home: NextPage = () => {
+  const fetcher = (url: string) => fetch(url).then((r) => r.json())
+  const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+  if (!data) return <div>Loading...</div>
+  if (error) return <div>Error!</div>
 	const spread = data.US10Y.value - data.US02Y.value
 	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
 
@@ -88,7 +88,7 @@ export default function Home() {
 						</h2>
 						<div className={styles.info}>
 							<span className={getClassName(data.cpi.new, data.cpi.old)}>
-								{getPercentageChange(data.cpi.new, data.cpi.old).toFixed(1)}%
+								{getPercentageChange(data.cpi.new, data.cpi.old, false).toFixed(1)}%
 							</span>{' '}
 							since {new Date().toLocaleString('default', { month: 'short' })}{' '}
 							{new Date().getFullYear() - 1}
@@ -241,14 +241,15 @@ export default function Home() {
 		</div>
 	)
 }
+export default Home
 
-function getPercentageChange(newNum, oldNum, absolute) {
+function getPercentageChange(newNum: number, oldNum: number, absolute: boolean) {
 	if (absolute) {
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}
 	return ((newNum - oldNum) / oldNum) * 100
 }
 
-function getClassName(a, b) {
+function getClassName(a: number, b: number) {
 	return a > b ? styles.green : styles.red
 }
