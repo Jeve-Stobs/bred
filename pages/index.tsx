@@ -229,7 +229,7 @@ const Home: NextPage = () => {
 					</div>
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>
-							What's the likelyhood that the USD will deflate?
+							What&apos;s the likelyhood that the USD will deflate?
 						</h2>
 						<div className={styles.info}>
 							Deflation probability:{' '}
@@ -253,7 +253,7 @@ const Home: NextPage = () => {
 					</div>
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>
-							Key inflation (the fed's favorite number)
+							Key inflation (the fed&apos;s favorite number)
 						</h2>
 						<div className={styles.info}>
 						PCEPI:{' '}
