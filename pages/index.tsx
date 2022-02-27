@@ -3,7 +3,6 @@ import useSWR from 'swr'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
-
 const Home: NextPage = () => {
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
