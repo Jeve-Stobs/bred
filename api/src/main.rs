@@ -40,7 +40,7 @@ async fn main() -> std::io::Result<()> {
             )
             .route("/data", web::get().to(index))
     })
-    .bind(("127.0.0.1", 3002))?
+    .bind(("0.0.0.0", 3002))?
     .run()
     .await
 }
