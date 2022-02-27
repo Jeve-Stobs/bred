@@ -29,7 +29,6 @@ us10y_analysis = list(analysis.values())[0]
 us02y_analysis = list(analysis.values())[-1]
 
 index = {
-    'data' : {
             'US10Y' : {
                 'value' : us10y_analysis.indicators["open"],
                 'previous' : us10y_analysis.indicators["close"]
@@ -71,7 +70,6 @@ index = {
                 'new' : total_nonfarm_payroll.iloc[-1],
                 'old' : total_nonfarm_payroll.iloc[-2]
             }
-    }
 }
 # write to json file
 with open('data.json', 'w') as outfile:

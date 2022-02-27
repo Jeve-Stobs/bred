@@ -38,3 +38,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+
+# Added by cargo
+
+/api/target
+/api/cargo.lock
