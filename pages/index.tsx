@@ -227,6 +227,54 @@ const Home: NextPage = () => {
 							</div>{' '}
 						</div>
 					</div>
+					<div className={styles.card}>
+						<h2 className={styles.card_title}>
+							What's the likelyhood that the USD will deflate?
+						</h2>
+						<div className={styles.info}>
+							Deflation probability:{' '}
+							<span
+								className={getClassName(data.deflation.new, data.deflation.old)}
+							>
+								{data.deflation.new}% chance
+							</span>
+							<br />
+							<br />
+							<div className={styles.card_footer}>
+								{data.deflation.new > data.deflation.old ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.deflation.new,
+									data.deflation.old,
+									true
+								).toFixed(1)}
+								% from last month
+							</div>{' '}
+						</div>
+					</div>
+					<div className={styles.card}>
+						<h2 className={styles.card_title}>
+							Key inflation (the fed's favorite number)
+						</h2>
+						<div className={styles.info}>
+						PCEPI:{' '}
+							<span
+								className={getClassName(data.inflation.new, data.inflation.old)}
+							>
+								{getPercentageChange(data.inflation.new, data.inflation.old, false).toFixed(1)}%
+							</span>
+							<br />
+							<br />
+							<div className={styles.card_footer}>
+								{data.inflation.new > data.inflation.lastMonth ? 'Up' : 'Down'}{' '}
+								{getPercentageChange(
+									data.inflation.new,
+									data.inflation.lastMonth,
+									true
+								).toFixed(1)}
+								% from last month
+							</div>{' '}
+						</div>
+					</div>
 				</div>
 			</main>
 

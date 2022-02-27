@@ -22,6 +22,8 @@ policy = fred.get_series('USEPUINDXD', observation_start=one_year_ago, observati
 alcohol = fred.get_series('SMU06000004244530001', observation_start=one_year_ago, observation_end=today)
 initial_claims = fred.get_series('ICSA', observation_start=one_year_ago, observation_end=today)
 total_nonfarm_payroll = fred.get_series('PAYEMS', observation_start=one_year_ago, observation_end=today)
+deflation_probability = fred.get_series('STLPPMDEF', observation_start=one_year_ago, observation_end=today)
+key_inflation = fred.get_series('PCEPI', observation_start=one_year_ago, observation_end=today)
 
 # fetch tradingview data for bond yields
 analysis = get_multiple_analysis(screener="cfd", interval=Interval.INTERVAL_1_DAY, symbols=["TVC:US10Y", "TVC:US02Y"])
@@ -69,7 +71,16 @@ index = {
             'payroll' : {
                 'new' : total_nonfarm_payroll.iloc[-1],
                 'old' : total_nonfarm_payroll.iloc[-2]
-            }
+            },
+            'deflation' : {
+                'new' : deflation_probability.iloc[-1],
+                'old' : deflation_probability.iloc[-2]
+            },
+            'inflation' : {
+                'new' : key_inflation.iloc[-1],
+                'old' : key_inflation.iloc[0],
+                'lastMonth' : key_inflation.iloc[-2]
+            },
 }
 # write to json file
 with open('data.json', 'w') as outfile:
