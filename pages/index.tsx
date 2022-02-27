@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  const { data, error } = useSWR('http://localhost:3002/data', fetcher)
+  const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
   if (!data) return <div></div>
   if (error) return <div>Error!</div>
 	const spread = data.US10Y.value - data.US02Y.value
