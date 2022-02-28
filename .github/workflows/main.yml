@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: '3.x'
           architecture: x64
-      - run: python /api/fetch.py
+      - run: python ./api/fetch.py
 
       # Runs a set of commands using the runners shell
       - name: rust-cargob
