@@ -32,13 +32,13 @@ us02y_analysis = list(analysis.values())[-1]
 
 index = {
             'US10Y' : {
-                'value' : us10y_analysis.indicators["open"],
-                'previous' : us10y_analysis.indicators["close"]
+                'value' : us10y_analysis.indicators["close"],
+                'previous' : us10y_analysis.indicators["open"]
 
             },
             'US02Y' : {
-                'value' : us02y_analysis.indicators["open"],
-                'previous' : us02y_analysis.indicators["close"]
+                'value' : us02y_analysis.indicators["close"],
+                'previous' : us02y_analysis.indicators["open"]
 
             },
             'unemployment' : {
