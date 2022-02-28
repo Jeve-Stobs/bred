@@ -26,6 +26,8 @@ def func():
     total_nonfarm_payroll = fred.get_series('PAYEMS', observation_start=one_year_ago, observation_end=today)
     deflation_probability = fred.get_series('STLPPMDEF', observation_start=one_year_ago, observation_end=today)
     key_inflation = fred.get_series('PCEPI', observation_start=one_year_ago, observation_end=today)
+    us10y_previous = fred.get_series('DGS10', observation_start=one_year_ago, observation_end=today)
+    us02y_previous = fred.get_series('DGS2', observation_start=one_year_ago, observation_end=today)
 
     # fetch tradingview data for bond yields
     analysis = get_multiple_analysis(screener="cfd", interval=Interval.INTERVAL_1_DAY, symbols=["TVC:US10Y", "TVC:US02Y"])
@@ -35,12 +37,12 @@ def func():
     index = {
             'US10Y' : {
                 'value' : us10y_analysis.indicators["close"],
-                'previous' : us10y_analysis.indicators["open"]
+                'previous' : us10y_previous.iloc[-1]
 
             },
             'US02Y' : {
                 'value' : us02y_analysis.indicators["close"],
-                'previous' : us02y_analysis.indicators["open"]
+                'previous' :  us02y_previous.iloc[-1]
 
             },
             'unemployment' : {
