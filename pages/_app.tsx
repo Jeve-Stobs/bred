@@ -39,7 +39,7 @@ export default function App(props: AppProps) {
 				/>
 				<meta
 					name="description"
-					content="A data aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool built to gauge the health of financial markets"
 				/>
 				<link rel="shortcut icon" href="/images/favicon.ico" />
 				<meta
@@ -51,7 +51,7 @@ export default function App(props: AppProps) {
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
-					content="A data aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool built to gauge the health of financial markets"
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta
@@ -60,7 +60,7 @@ export default function App(props: AppProps) {
 				/>
 				<meta
 					name="twitter:description"
-					content="A data aggregation tool build to gauge the health of financial markets"
+					content="A data aggregation tool built to gauge the health of financial markets"
 				/>
 				<meta name="twitter:image" content="/images/fredgraph.png" />
 				<meta
