@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'normalize.css/normalize.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 

@@ -12,6 +12,7 @@
 	"dependencies": {
 		"critters": "^0.0.16",
 		"next": "12.1.0",
+		"normalize.css": "^8.0.1",
 		"react": "^18.0.0-rc.0",
 		"react-dom": "^18.0.0-rc.0",
 		"swr": "^1.2.2"
