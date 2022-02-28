@@ -88,7 +88,7 @@ def func():
     with open('data.json', 'w') as outfile:
         json.dump(index, outfile)
         print('wrote to data.json')
-schedule.every(5).minutes.do(func)
+schedule.every(3).minutes.do(func)
 
 while True:
     schedule.run_pending()
