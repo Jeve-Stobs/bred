@@ -4,10 +4,10 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
-  if (!data) return <div></div>
-  if (error) return <div>Error!</div>
+	const fetcher = (url: string) => fetch(url).then((r) => r.json())
+	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+	if (!data) return <div></div>
+	if (error) return <div>Error!</div>
 	const spread = data.US10Y.value - data.US02Y.value
 	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
 
@@ -87,7 +87,10 @@ const Home: NextPage = () => {
 						</h2>
 						<div className={styles.info}>
 							<span className={getClassName(data.cpi.new, data.cpi.old)}>
-								{getPercentageChange(data.cpi.new, data.cpi.old, false).toFixed(1)}%
+								{getPercentageChange(data.cpi.new, data.cpi.old, false).toFixed(
+									1
+								)}
+								%
 							</span>{' '}
 							since {new Date().toLocaleString('default', { month: 'short' })}{' '}
 							{new Date().getFullYear() - 1}
@@ -255,11 +258,16 @@ const Home: NextPage = () => {
 							Key inflation (the fed&apos;s favorite number)
 						</h2>
 						<div className={styles.info}>
-						PCEPI:{' '}
+							PCEPI:{' '}
 							<span
 								className={getClassName(data.inflation.new, data.inflation.old)}
 							>
-								{getPercentageChange(data.inflation.new, data.inflation.old, false).toFixed(1)}%
+								{getPercentageChange(
+									data.inflation.new,
+									data.inflation.old,
+									false
+								).toFixed(1)}
+								%
 							</span>
 							<br />
 							<br />
@@ -290,7 +298,11 @@ const Home: NextPage = () => {
 }
 export default Home
 
-function getPercentageChange(newNum: number, oldNum: number, absolute: boolean) {
+function getPercentageChange(
+	newNum: number,
+	oldNum: number,
+	absolute: boolean
+) {
 	if (absolute) {
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}

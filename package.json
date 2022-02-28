@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --write --use-tabs true --single-quote true \"**/*.{js,jsx,json,css}\""
+		"format": "prettier --write --use-tabs true --single-quote true \"**/*.{js,jsx,json,css,tsx}\""
 	},
 	"dependencies": {
 		"critters": "^0.0.16",
