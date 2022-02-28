@@ -16,6 +16,7 @@
 /build
 /api/node_modules
 /api/data.json
+/api/.env
 
 # misc
 .DS_Store
