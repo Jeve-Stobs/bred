@@ -1,28 +1,28 @@
 {
-  "name": "bred",
-  "version": "0.1.0-canary.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write --use-tabs true --single-quote true \"**/*.{js,jsx,json,css,tsx}\""
-  },
-  "dependencies": {
-    "critters": "^0.0.16",
-    "next": "12.1.0",
-    "normalize.css": "^8.0.1",
-    "react": "^18.0.0-rc.0",
-    "react-dom": "^18.0.0-rc.0",
-    "swr": "^1.2.2"
-  },
-  "devDependencies": {
-    "@types/node": "17.0.21",
-    "@types/react": "17.0.39",
-    "eslint": "8.10.0",
-    "eslint-config-next": "12.1.0",
-    "prettier": "^2.5.1",
-    "typescript": "4.6.2"
-  }
+	"name": "bred",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier --write --use-tabs true --single-quote true \"**/*.{js,jsx,json,css,tsx}\""
+	},
+	"dependencies": {
+		"critters": "^0.0.16",
+		"next": "12.1.0",
+		"normalize.css": "^8.0.1",
+		"react": "^18.0.0-rc.0",
+		"react-dom": "^18.0.0-rc.0",
+		"swr": "^1.2.2"
+	},
+	"devDependencies": {
+		"@types/node": "17.0.21",
+		"@types/react": "17.0.39",
+		"eslint": "8.10.0",
+		"eslint-config-next": "12.1.0",
+		"prettier": "^2.5.1",
+		"typescript": "4.6.2"
+	}
 }
