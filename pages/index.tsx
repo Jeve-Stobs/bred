@@ -6,7 +6,7 @@ import Error from './_error'
 
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+	const { data, error } = useSWR('http://localhost:3002/data', fetcher)
 	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
@@ -23,21 +23,21 @@ const Home: NextPage = () => {
 
 				<div className={styles.grid}>
 					<div className={styles.card}>
-						<h2 className={styles.card_title}>Has the yield curve inverted?</h2>
+						<h2 className={styles.card_title}>
+							Has the yield curve gone negative?
+						</h2>
 						<span className={styles.info}>
 							10Y minus 2Y:&nbsp;
 							<span className={getClassName(spread, previous_spread_close)}>
-								{spread.toFixed(2)}%
+								{spread.toFixed(2)}
 							</span>
 						</span>
 						<br />
 						<br />
 						<span className={styles.card_footer}>
 							{spread > previous_spread_close ? 'Up' : 'Down'}{' '}
-							{getPercentageChange(spread, previous_spread_close, true).toFixed(
-								1
-							)}
-							% from yesterday
+							{Math.abs(spread - previous_spread_close).toFixed(2)} points from
+							yesterday
 						</span>
 					</div>
 
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
 						<div className={styles.info}>
 							<span
 								className={getClassName(
-									data.unemployment.real,
+									data.unemployment.fudged,
 									data.unemployment.lastMonth
 								)}
 							>
@@ -72,20 +72,16 @@ const Home: NextPage = () => {
 								{data.unemployment.fudged > data.unemployment.lastMonth
 									? 'Up'
 									: 'Down'}{' '}
-								{getPercentageChange(
-									data.unemployment.fudged,
-									data.unemployment.lastMonth,
-									true
-								).toFixed(1)}
-								% from last month
+								{Math.abs(
+									data.unemployment.fudged - data.unemployment.lastMonth
+								).toFixed(1)}{' '}
+								points from last month
 							</span>
 						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2 className={styles.card_title}>
-							Good god, here comes inflation
-						</h2>
+						<h2 className={styles.card_title}>CPI inflation</h2>
 						<div className={styles.info}>
 							<span className={getClassName(data.cpi.new, data.cpi.old)}>
 								{getPercentageChange(data.cpi.new, data.cpi.old, false).toFixed(
@@ -99,18 +95,16 @@ const Home: NextPage = () => {
 							<br />
 							<div className={styles.card_footer}>
 								{data.cpi.new > data.cpi.lastMonth ? 'Up' : 'Down'}{' '}
-								{getPercentageChange(
-									data.cpi.new,
-									data.cpi.lastMonth,
-									true
-								).toFixed(1)}
-								% from last month
+								{Math.abs(data.cpi.new - data.cpi.lastMonth).toFixed(2)} points
+								from last month
 							</div>
 						</div>
 					</div>
 
 					<div className={styles.card}>
-						<h2 className={styles.card_title}>Time for real interest rates</h2>
+						<h2 className={styles.card_title}>
+							Real interest rates (Inflation Indexed)
+						</h2>
 						<div className={styles.info}>
 							Real rates:{' '}
 							<span
@@ -127,12 +121,8 @@ const Home: NextPage = () => {
 								{Math.abs(data.realRates.new) > Math.abs(data.realRates.old)
 									? 'Up'
 									: 'Down'}{' '}
-								{getPercentageChange(
-									data.realRates.new,
-									data.realRates.old,
-									true
-								).toFixed(1)}
-								% from yesterday
+								{Math.abs(data.realRates.new - data.realRates.old).toFixed(1)}{' '}
+								points from yesterday
 							</div>{' '}
 						</div>
 					</div>
@@ -235,7 +225,8 @@ const Home: NextPage = () => {
 							What&apos;s the likelyhood that the USD will deflate?
 						</h2>
 						<div className={styles.info}>
-							Deflation probability:{' '}
+							Deflation probability (like this'll ever happen): <br />
+							<br />
 							<span
 								className={getClassName(data.deflation.new, data.deflation.old)}
 							>
@@ -274,12 +265,10 @@ const Home: NextPage = () => {
 							<br />
 							<div className={styles.card_footer}>
 								{data.inflation.new > data.inflation.lastMonth ? 'Up' : 'Down'}{' '}
-								{getPercentageChange(
-									data.inflation.new,
-									data.inflation.lastMonth,
-									true
-								).toFixed(1)}
-								% from last month
+								{Math.abs(
+									data.inflation.new - data.inflation.lastMonth
+								).toFixed(1)}{' '}
+								points from last month
 							</div>{' '}
 						</div>
 					</div>
