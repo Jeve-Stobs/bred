@@ -225,7 +225,7 @@ const Home: NextPage = () => {
 							What&apos;s the likelyhood that the USD will deflate?
 						</h2>
 						<div className={styles.info}>
-							Deflation probability (like this'll ever happen): <br />
+							Deflation probability (like this&apos;ll ever happen): <br />
 							<br />
 							<span
 								className={getClassName(data.deflation.new, data.deflation.old)}
