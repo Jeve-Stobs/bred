@@ -7,7 +7,8 @@ use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::fs;
 use tracing::info;
-use tracing_subscriber::{fmt, layer::SubscriberExt, EnvFilter, Registry};
+use tracing_subscriber::filter::EnvFilter;
+use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
 
 async fn index() -> impl Responder {
     // initialize json file
@@ -31,13 +32,13 @@ async fn main() -> std::io::Result<()> {
     info!("❤️ listening on port 3002");
     // prep http server
     HttpServer::new(|| {
+        let cors = Cors::default() // <- Construct CORS middleware builder)
+            .supports_credentials()
+            .max_age(3600);
+
         App::new()
             .wrap(tracing_actix_web2::Tracer)
-            .wrap(
-                Cors::new() // <- Construct CORS middleware builder
-                    .supports_credentials()
-                    .finish(),
-            )
+            .wrap(cors)
             .route("/data", web::get().to(index))
     })
     .bind(("0.0.0.0", 3002))?
