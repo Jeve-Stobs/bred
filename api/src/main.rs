@@ -33,7 +33,7 @@ async fn main() -> std::io::Result<()> {
     // prep http server
     HttpServer::new(|| {
         let cors = Cors::default() // <- Construct CORS middleware builder)
-            .supports_credentials()
+            .allow_any_origin()
             .max_age(3600);
 
         App::new()
