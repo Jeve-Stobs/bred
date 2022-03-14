@@ -48,7 +48,7 @@ export default function App(props: AppProps) {
 					content="Is the party over? | An of analysis of recessionary indicators"
 				/>
 				<meta property="og:locale" content="en_US" />
-				<meta property="og:url" content="https://fred.jevestobs.dev" />
+				<meta property="og:url" content="https://bred.jevestobs.dev" />
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:description"
