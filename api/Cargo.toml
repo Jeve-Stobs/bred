@@ -9,4 +9,4 @@ serde_json = "1.0.79"
 actix-cors = "0.6.1"
 tracing = "0.1.32"
 tracing-subscriber  = { version = "0.3.9", features = ["env-filter"] }
-tracing-actix-web2 = { git = "https://github.com/Jeve-Stobs/tracing-actix-web2" }
+tracing-actix-web2 = "2.0.0"
