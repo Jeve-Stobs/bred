@@ -5,9 +5,7 @@ const FourOhFour: NextPage = () => {
 	return (
 		<div className={styles.error_main}>
 			<div className={styles.error_main_nested}>
-				<div className={styles.error_main_text}>
-					A 404 error occurred on the server 😔
-				</div>
+				<div className={styles.error_main_text}>404 not found 🔎</div>
 			</div>
 		</div>
 	)
