@@ -7,7 +7,7 @@ import Error from './_error'
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
 	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
-	if (!data) return <Error />
+	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
 	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
