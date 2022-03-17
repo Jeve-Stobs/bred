@@ -15,5 +15,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: cd api && cargo build --release
-    - name: Run tests
-      run: cd api && cargo test -- --test-threads=2
