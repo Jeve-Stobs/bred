@@ -1,8 +1,3 @@
-extern crate serde_json;
-extern crate tracing;
-extern crate tracing_actix_web2;
-extern crate tracing_subscriber;
-
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::fs;
