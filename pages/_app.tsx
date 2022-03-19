@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import 'normalize.css/normalize.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import PlausibleProvider from 'next-plausible'
 
 export default function App(props: AppProps) {
 	const { Component, pageProps } = props
@@ -69,7 +70,9 @@ export default function App(props: AppProps) {
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
 				/>
 			</Head>
-			<Component {...pageProps} />
+			<PlausibleProvider domain="bred.jevestobs.dev">
+				<Component {...pageProps} />
+			</PlausibleProvider>
 		</>
 	)
 }
