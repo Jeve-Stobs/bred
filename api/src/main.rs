@@ -1,9 +1,21 @@
+#[macro_use]
+extern crate dotenv_codegen;
+mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::fs;
+use std::thread;
+use std::time::Duration;
 use tracing::info;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
+use utils::{client, data};
+
+fn write_to_file() {
+    let data = data::get_data();
+    let data_string = serde_json::to_string(&data).unwrap();
+    fs::write("data.json", data_string).unwrap();
+}
 
 async fn index() -> impl Responder {
     // initialize json file
@@ -18,6 +30,10 @@ async fn index() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    thread::spawn(move || loop {
+        write_to_file();
+        thread::sleep(Duration::from_secs(60));
+    });
     // initialize tracing
     let subscriber = Registry::default()
         .with(EnvFilter::new("debug,tracing_actix_web2=trace"))
