@@ -28,14 +28,34 @@ pub fn get_data() -> serde_json::Value {
         }
         values.push(v);
     }
+    let ten_year = scraper::wsj_bond(
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
+        "#quote_val",
+    );
+    let ten_year = ten_year.parse::<f64>().unwrap();
+    let ten_year_change = scraper::wsj_bond(
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
+        "#quote_change",
+    );
+    let ten_year_change = ten_year_change.parse::<f64>().unwrap();
+    let two_year = scraper::wsj_bond(
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
+        "#quote_val",
+    );
+    let two_year = two_year.parse::<f64>().unwrap();
+    let two_year_change = scraper::wsj_bond(
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
+        "#quote_change",
+    );
+    let two_year_change = two_year_change.parse::<f64>().unwrap();
     let data = json!({
         "US02Y": {
-            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices", ".data_data", 4),
-            "value": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices", "#quote_val", 0),
+            "previous": two_year - two_year_change,
+            "value": two_year,
         },
           "US10Y": {
-            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices", ".data_data", 4),
-            "value": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices", "#quote_val", 0),
+            "previous": ten_year - ten_year_change,
+            "value": ten_year,
         },
         "unemployment": {
             "fudged": values[0][values[0].len() - 1],
