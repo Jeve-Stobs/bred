@@ -6,7 +6,7 @@ import Error from './_error'
 
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+	const { data, error } = useSWR('http://localhost:3002/data', fetcher)
 	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
@@ -29,15 +29,15 @@ const Home: NextPage = () => {
 						<span className={styles.info}>
 							10Y minus 2Y:&nbsp;
 							<span className={getClassName(spread, previous_spread_close)}>
-								{spread.toFixed(2)}
+								{Math.round(spread * 100)} bps
 							</span>
 						</span>
 						<br />
 						<br />
 						<span className={styles.card_footer}>
-							{spread > previous_spread_close ? 'Up' : 'Down'}{' '}
-							{Math.abs(spread - previous_spread_close).toFixed(2)} points from
-							yesterday
+							{upOrDown(spread, previous_spread_close)}{' '}
+							{Math.round(Math.abs(spread - previous_spread_close) * 100)} bps
+							from yesterday
 						</span>
 					</div>
 
@@ -69,13 +69,16 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<span className={styles.card_footer}>
-								{data.unemployment.fudged > data.unemployment.lastMonth
-									? 'Up'
-									: 'Down'}{' '}
-								{Math.abs(
-									data.unemployment.fudged - data.unemployment.lastMonth
-								).toFixed(1)}{' '}
-								points from last month
+								{upOrDown(
+									data.unemployment.fudged,
+									data.unemployment.lastMonth
+								)}{' '}
+								{Math.round(
+									Math.abs(
+										data.unemployment.fudged - data.unemployment.lastMonth
+									) * 100
+								)}{' '}
+								bps from last month
 							</span>
 						</div>
 					</div>
@@ -94,16 +97,16 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.cpi.new > data.cpi.lastMonth ? 'Up' : 'Down'}{' '}
-								{Math.abs(data.cpi.new - data.cpi.lastMonth).toFixed(2)} points
-								from last month
+								{upOrDown(data.cpi.new, data.cpi.lastMonth)}{' '}
+								{Math.round(Math.abs(data.cpi.new - data.cpi.lastMonth) * 100)}{' '}
+								bps from last month
 							</div>
 						</div>
 					</div>
 
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>
-							Real interest rates (Inflation Indexed)
+							Interest rates (inflation indexed)
 						</h2>
 						<div className={styles.info}>
 							Real rates:{' '}
@@ -118,11 +121,11 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{Math.abs(data.realRates.new) > Math.abs(data.realRates.old)
-									? 'Up'
-									: 'Down'}{' '}
-								{Math.abs(data.realRates.new - data.realRates.old).toFixed(1)}{' '}
-								points from yesterday
+								{upOrDown(data.realRates.new, data.realRates.old)}{' '}
+								{Math.round(
+									Math.abs(data.realRates.new - data.realRates.old) * 100
+								)}{' '}
+								bps from yesterday
 							</div>{' '}
 						</div>
 					</div>
@@ -139,7 +142,7 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.policy.new > data.policy.old ? 'Up' : 'Down'}{' '}
+								{upOrDown(data.policy.new, data.policy.old)}{' '}
 								{getPercentageChange(
 									data.policy.new,
 									data.policy.old,
@@ -164,7 +167,7 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.alcohol.new > data.alcohol.old ? 'Up' : 'Down'}{' '}
+								{upOrDown(data.alcohol.new, data.alcohol.old)}{' '}
 								{getPercentageChange(
 									data.alcohol.new,
 									data.alcohol.old,
@@ -186,7 +189,7 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.claims.new > data.claims.old ? 'Up' : 'Down'}{' '}
+								{upOrDown(data.claims.new, data.claims.old)}{' '}
 								{getPercentageChange(
 									data.claims.new,
 									data.claims.old,
@@ -210,7 +213,7 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.payroll.new > data.payroll.old ? 'Up' : 'Down'}{' '}
+								{upOrDown(data.payroll.new, data.payroll.old)}{' '}
 								{getPercentageChange(
 									data.payroll.new,
 									data.payroll.old,
@@ -235,7 +238,7 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.deflation.new > data.deflation.old ? 'Up' : 'Down'}{' '}
+								{upOrDown(data.deflation.new, data.deflation.old)}{' '}
 								{getPercentageChange(
 									data.deflation.new,
 									data.deflation.old,
@@ -264,11 +267,11 @@ const Home: NextPage = () => {
 							<br />
 							<br />
 							<div className={styles.card_footer}>
-								{data.inflation.new > data.inflation.lastMonth ? 'Up' : 'Down'}{' '}
-								{Math.abs(
-									data.inflation.new - data.inflation.lastMonth
-								).toFixed(1)}{' '}
-								points from last month
+								{upOrDown(data.inflation.new, data.inflation.old)}{' '}
+								{Math.round(
+									Math.abs(data.inflation.new - data.inflation.lastMonth) * 100
+								)}{' '}
+								bps from last month
 							</div>{' '}
 						</div>
 					</div>
@@ -300,5 +303,9 @@ function getPercentageChange(
 }
 
 function getClassName(a: number, b: number) {
-	return a > b ? styles.green : styles.red
+	return a === b ? styles.grey : a > b ? styles.green : styles.red
+}
+
+function upOrDown(a: number, b: number) {
+	return a === b ? 'UNCH' : a > b ? 'Up' : 'Down'
 }

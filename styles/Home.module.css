@@ -107,6 +107,11 @@
 	font-family: light-text !important;
 	font-weight: bold;
 }
+.grey {
+	color: #808080 !important;
+	font-family: light-text !important;
+	font-weight: bold;
+}
 .error_main {
 	font-family: bold-text;
 	display: flex;
