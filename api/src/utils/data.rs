@@ -30,11 +30,11 @@ pub fn get_data() -> serde_json::Value {
     }
     let data = json!({
         "US02Y": {
-            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices", ".data_data", 5),
+            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices", ".data_data", 4),
             "value": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices", "#quote_val", 0),
         },
           "US10Y": {
-            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices", ".data_data", 5),
+            "previous": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices", ".data_data", 4),
             "value": scraper::wsj_bond("https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices", "#quote_val", 0),
         },
         "unemployment": {
