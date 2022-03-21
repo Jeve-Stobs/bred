@@ -13,5 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Create env file
+      run: |
+          cd api && touch .env
+          echo FRED_API_KEY=${{ secrets.FRED_API_KEY }} >> .env
     - name: Build
       run: cd api && cargo build --release
