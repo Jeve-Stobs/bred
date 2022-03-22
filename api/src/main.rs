@@ -4,6 +4,8 @@ mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::fs;
+use std::fs::File;
+use std::io::BufWriter;
 use std::thread;
 use std::time::Duration;
 use tracing::info;
@@ -12,8 +14,15 @@ use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
 fn write_to_file() {
+    // remove the file if it exists
+    fs::remove_file("data.json").unwrap();
+    // create a new file with the name data.json
+    BufWriter::new(File::create("data.json").unwrap());
+    // get the data from the api
     let data = data::get_data();
+    // stringify the data
     let data_string = serde_json::to_string(&data).unwrap();
+    // write the data to the file
     fs::write("data.json", data_string).unwrap();
 }
 
