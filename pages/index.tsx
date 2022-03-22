@@ -256,8 +256,11 @@ const Home: NextPage = () => {
 			</main>
 
 			<footer className={styles.footer}>
-				<Link href="https://jevestobs.dev" passHref>
-					a jevestobs project&nbsp;|&nbsp;
+				<Link
+					href="https://github.com/Jeve-Stobs/bred?ref=bred.jevestobs.dev"
+					passHref
+				>
+					GitHub&nbsp;|&nbsp;
 				</Link>
 				<i className={styles.footer_info}>
 					Automatically refreshes every 3 minutes
