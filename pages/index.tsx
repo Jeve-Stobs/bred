@@ -29,15 +29,18 @@ const Home: NextPage = () => {
 						<span className={styles.info}>
 							10Y minus 2Y:&nbsp;
 							<span className={getClassName(spread, previous_spread_close)}>
-								{Math.round(spread * 100)} bps
+								{getFlooredFixed(spread * 100, 2)} bps
 							</span>
 						</span>
 						<br />
 						<br />
 						<span className={styles.card_footer}>
 							{upOrDown(spread, previous_spread_close)}{' '}
-							{Math.round(Math.abs(spread - previous_spread_close) * 100)} bps
-							from yesterday
+							{getFlooredFixed(
+								Math.abs(spread - previous_spread_close) * 100,
+								2
+							)}{' '}
+							bps from yesterday
 						</span>
 					</div>
 
@@ -308,4 +311,8 @@ function getClassName(a: number, b: number) {
 
 function upOrDown(a: number, b: number) {
 	return a === b ? 'UNCH' : a > b ? 'Up' : 'Down'
+}
+/* https://stackoverflow.com/a/36862114/15698722 */
+function getFlooredFixed(v: number, d: number) {
+	return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)
 }
