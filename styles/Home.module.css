@@ -131,9 +131,9 @@
 	padding-bottom: 1rem;
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
-	border-radius: 0.25rem;
+	border-radius: 0.5rem;
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+		0 4px 6px -2px rgba(0, 0, 0, 0.5);
 }
 .error_main_text {
 	margin-bottom: 0.5rem;

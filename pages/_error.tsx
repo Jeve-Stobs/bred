@@ -6,9 +6,7 @@ const Error: NextPage = (statusCode) => {
 		<div className={styles.error_main}>
 			<div className={styles.error_main_nested}>
 				<div className={styles.error_main_text}>
-					{statusCode
-						? `An error ${statusCode} occurred on server`
-						: 'An error occurred on client'}
+					{`An error ${statusCode} occurred on server`}
 				</div>
 			</div>
 		</div>
