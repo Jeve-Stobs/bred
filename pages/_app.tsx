@@ -25,20 +25,6 @@ export default function App(props: AppProps) {
 					as="fetch"
 					crossOrigin="anonymous"
 				/>
-				<link
-					rel="preload"
-					href="/font/8b42e3fc6d1d161d6fbd7487babe6cfe.woff2"
-					as="font"
-					type="font/woff2"
-					crossOrigin="anonymous"
-				/>
-				<link
-					rel="preload"
-					href="/font/f31b2ecb2f8e039d53bd75d5314229c7.woff2"
-					as="font"
-					type="font/woff2"
-					crossOrigin="anonymous"
-				/>
 				<meta
 					name="description"
 					content="A data aggregation tool built to gauge the health of financial markets"
