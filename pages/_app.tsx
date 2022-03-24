@@ -85,6 +85,7 @@ export default function App(props: AppProps) {
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
 				/>
 			</Head>
+			<Component {...pageProps} />
 		</>
 	)
 }
