@@ -19,6 +19,7 @@
 /api/.env
 public/sw.js
 public/workbox-*.js
+public/*.js.map
 # misc
 .DS_Store
 *.pem
