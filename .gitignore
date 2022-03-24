@@ -17,7 +17,8 @@
 /api/node_modules
 /api/data.json
 /api/.env
-
+public/sw.js
+public/workbox-*.js
 # misc
 .DS_Store
 *.pem
