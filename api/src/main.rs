@@ -13,17 +13,18 @@ use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
-fn write_to_file() {
-    // remove the file if it exists
-    fs::remove_file("data.json").unwrap();
+fn write_to_file() -> std::io::Result<()> {
     // create a new file with the name data.json
-    let mut f = BufWriter::new(File::create("data.json").unwrap());
+    let f = File::create("data.json")?;
     // get the data from the api
     let data = data::get_data();
-    // stringify the data
-    let data_string = serde_json::to_string(&data).unwrap();
+    // create a new writer in buffer
+    let mut writer = BufWriter::new(f);
     // write the data to the file
-    f.write_all(data_string.as_bytes()).unwrap();
+    serde_json::to_writer_pretty(&mut writer, &data)?;
+    // flush the buffer
+    writer.flush()?;
+    Ok(())
 }
 
 async fn index() -> impl Responder {
@@ -40,7 +41,8 @@ async fn index() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     thread::spawn(move || loop {
-        write_to_file();
+        // write data to file
+        write_to_file().unwrap();
         thread::sleep(Duration::from_secs(30));
     });
     // initialize tracing
