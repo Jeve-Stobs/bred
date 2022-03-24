@@ -41,7 +41,7 @@ async fn index() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     thread::spawn(move || loop {
         write_to_file();
-        thread::sleep(Duration::from_secs(180));
+        thread::sleep(Duration::from_secs(30));
     });
     // initialize tracing
     let subscriber = Registry::default()
