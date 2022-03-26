@@ -3,14 +3,15 @@ extern crate dotenv_codegen;
 mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::fs;
-use std::fs::File;
-use std::io::{BufWriter, Write};
-use std::thread;
-use std::time::Duration;
+use std::{
+    fs,
+    fs::File,
+    io::{BufWriter, Write},
+    thread,
+    time::Duration,
+};
 use tracing::info;
-use tracing_subscriber::filter::EnvFilter;
-use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
+use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
 fn write_to_file() -> std::io::Result<()> {
