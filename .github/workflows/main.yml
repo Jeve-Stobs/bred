@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Create env file
       run: |
-          cd api && touch Cargo.toml
+          cd api && touch Config.toml
           echo fred_key = "${{ secrets.FRED_API_KEY }}" >> Cargo.toml
     - name: Build
       run: cd api && cargo build --release
