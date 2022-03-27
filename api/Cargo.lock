@@ -275,7 +275,7 @@ dependencies = [
 
 [[package]]
 name = "bred-api"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "actix-cors",
  "actix-web",
