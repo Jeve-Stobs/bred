@@ -16,6 +16,7 @@
 /build
 /api/node_modules
 /api/data.json
+/api/logs
 public/sw.js
 public/workbox-*.js
 public/*.js.map

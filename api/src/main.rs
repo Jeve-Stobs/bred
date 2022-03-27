@@ -2,7 +2,7 @@ mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::{fs, fs::OpenOptions, io::Write, thread, time::Duration};
-use tracing::info;
+use tracing_appender::rolling::{RollingFileAppender, Rotation};
 use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
@@ -39,13 +39,22 @@ async fn main() -> std::io::Result<()> {
         write_to_file().unwrap();
         thread::sleep(Duration::from_secs(30));
     });
+    // inititialize tracing appender
+    let file_appender = RollingFileAppender::new(Rotation::NEVER, "logs", "debug.log");
+    // initilize tracing appender as non-blocking
+    let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
     // initialize tracing
     let subscriber = Registry::default()
         .with(EnvFilter::new("debug,tracing_actix_web2=trace"))
-        .with(fmt::layer().with_target(false));
+        .with(
+            fmt::layer()
+                .with_writer(non_blocking)
+                .with_ansi(false)
+                .with_target(false),
+        );
     tracing::subscriber::set_global_default(subscriber).unwrap();
     // send heartbeat msg
-    info!("❤️ listening on port 3002");
+    println!("❤️ listening on port 3002");
     // prep http server
     HttpServer::new(|| {
         let cors = Cors::default() // <- Construct CORS middleware builder)
