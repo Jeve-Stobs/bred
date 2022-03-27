@@ -170,7 +170,7 @@ const Home: NextPage = () => {
 						<div className={styles.info}>
 							Initial claims:{' '}
 							<span className={getClassName(data.claims.new, data.claims.old)}>
-								{new String(data.claims.new).substring(0, 3)}k
+								{String(data.claims.new).substring(0, 3)}k
 							</span>
 						</div>
 						<div className={styles.card_footer}>
@@ -192,7 +192,7 @@ const Home: NextPage = () => {
 							<span
 								className={getClassName(data.payroll.new, data.payroll.old)}
 							>
-								{new String(data.payroll.new).substring(0, 3)}k
+								{String(data.payroll.new).substring(0, 3)}k
 							</span>
 						</div>
 						<div className={styles.card_footer}>
@@ -283,12 +283,25 @@ function getPercentageChange(
 }
 
 function getClassName(a: number, b: number) {
-	return a === b ? styles.grey : a > b ? styles.green : styles.red
+	if (a === b) {
+		return styles.grey
+	}
+	if (a > b) {
+		return styles.green
+	}
+	return styles.red
 }
 
 function upOrDown(a: number, b: number) {
-	return a === b ? 'UNCH' : a > b ? 'Up' : 'Down'
+	if (a === b) {
+		return 'UNCH'
+	}
+	if (a > b) {
+		return 'Up'
+	}
+	return 'Down'
 }
+
 /* https://stackoverflow.com/a/36862114/15698722 */
 function getFlooredFixed(v: number, d: number) {
 	return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)

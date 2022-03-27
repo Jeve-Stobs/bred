@@ -18,13 +18,13 @@
 	border-top: 1px solid #eaeaea;
 	justify-content: center;
 	align-items: center;
-	font-family: bold-text;
+	font-family: bold-text, sans-serif;
 }
 .footer_info {
 	font-size: 0.95rem;
 	color: grey;
 	font-style: oblique;
-	font-family: light-text;
+	font-family: light-text, sans-serif;
 }
 .title a:hover,
 .title a:focus,
@@ -36,7 +36,7 @@
 	margin: 0;
 	line-height: 1.15;
 	font-size: 4rem;
-	font-family: bold-text;
+	font-family: bold-text, sans-serif;
 }
 
 .title,
@@ -50,7 +50,7 @@
 	font-size: 1.5rem;
 	color: grey;
 	font-style: oblique;
-	font-family: light-text;
+	font-family: light-text, sans-serif;
 }
 
 .code {
@@ -82,16 +82,16 @@
 	max-width: 300px;
 }
 .card_title {
-	font-family: bold-text;
+	font-family: bold-text, sans-serif;
 	font-size: 1.3rem;
 }
 .card_footer {
 	color: grey;
 	font-style: oblique;
-	font-family: light-text;
+	font-family: light-text, sans-serif;
 }
 .info {
-	font-family: light-text;
+	font-family: light-text, sans-serif;
 	margin-bottom: 1rem;
 }
 .logo {
@@ -100,28 +100,27 @@
 }
 .green {
 	color: #00c805 !important;
-	font-family: light-text !important;
+	font-family: light-text, sans-serif !important;
 	font-weight: bold;
 }
 .red {
 	color: #fa5801 !important;
-	font-family: light-text !important;
+	font-family: light-text, sans-serif !important;
 	font-weight: bold;
 }
 .grey {
 	color: #808080 !important;
-	font-family: light-text !important;
+	font-family: light-text, sans-serif !important;
 	font-weight: bold;
 }
 .error_main {
-	font-family: bold-text;
+	font-family: bold-text, sans-serif;
 	display: flex;
 	overflow: hidden;
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;

@@ -1,0 +1,3 @@
+fred_key = 'YOUR_FRED_API_KEY'
+
+# make an account at https://fred.stlouisfed.org/docs/api/api_key.html to get your API key

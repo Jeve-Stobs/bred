@@ -16,10 +16,10 @@
 /build
 /api/node_modules
 /api/data.json
-/api/.env
 public/sw.js
 public/workbox-*.js
 public/*.js.map
+
 # misc
 .DS_Store
 *.pem
@@ -31,11 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+/api/Config.toml
 # vercel
 .vercel
 
@@ -47,4 +43,3 @@ yarn-error.log*
 
 /api/target
 /api/cargo.lock
-/lol

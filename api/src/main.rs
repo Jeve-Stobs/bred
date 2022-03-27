@@ -1,29 +1,24 @@
-#[macro_use]
-extern crate dotenv_codegen;
 mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::fs;
-use std::fs::File;
-use std::io::{BufWriter, Write};
-use std::thread;
-use std::time::Duration;
+use std::{fs, fs::OpenOptions, io::Write, thread, time::Duration};
 use tracing::info;
-use tracing_subscriber::filter::EnvFilter;
-use tracing_subscriber::{fmt, layer::SubscriberExt, Registry};
+use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
-fn write_to_file() {
-    // remove the file if it exists
-    fs::remove_file("data.json").unwrap();
+fn write_to_file() -> std::io::Result<()> {
     // create a new file with the name data.json
-    let mut f = BufWriter::new(File::create("data.json").unwrap());
+    let mut f = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .open("data.json")?;
     // get the data from the api
     let data = data::get_data();
-    // stringify the data
+    // convert data to [u8]
     let data_string = serde_json::to_string(&data).unwrap();
     // write the data to the file
-    f.write_all(data_string.as_bytes()).unwrap();
+    f.write_all(data_string.as_bytes())?;
+    Ok(())
 }
 
 async fn index() -> impl Responder {
@@ -40,8 +35,9 @@ async fn index() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     thread::spawn(move || loop {
-        write_to_file();
-        thread::sleep(Duration::from_secs(180));
+        // write data to file
+        write_to_file().unwrap();
+        thread::sleep(Duration::from_secs(30));
     });
     // initialize tracing
     let subscriber = Registry::default()
