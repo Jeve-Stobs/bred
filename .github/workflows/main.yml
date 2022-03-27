@@ -14,13 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create toml config file
+      working-directory: api
       run: |
-          cd api && touch Config.toml
+          touch Config.toml
           echo fred_key = '"${{ secrets.FRED_API_KEY }}"' >> Config.toml
           cat Config.toml
           pwd Config.toml
     - name: Build
-      run: cd api && cargo build --release
-    - name: Run
-      run: ./api/target/release/bred-api
+      working-directory: api
+      run: cargo build --release
+    - name: Run API for one minute
+      working-directory: api
+      run: ./target/release/bred-api
       timeout-minutes: 1
