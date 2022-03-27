@@ -20,5 +20,5 @@ jobs:
     - name: Build
       run: cd api && cargo build --release
     - name: Run
-      run: ./target/release/bred-api
+      run: ./api/target/release/bred-api
       timeout-minutes: 1
