@@ -36,16 +36,6 @@ export default function App(props: AppProps) {
 				<meta name="theme-color" content="#000000" />
 
 				<link rel="apple-touch-icon" href="/images/any_maskable.png" />
-				<link
-					rel="apple-touch-icon"
-					sizes="152x152"
-					href="/apple/favicon-152.png"
-				/>
-				<link
-					rel="apple-touch-icon"
-					sizes="180x180"
-					href="/apple/favicon-180.png"
-				/>
 				<link rel="manifest" href="/manifest.json" />
 				<link
 					rel="mask-icon"
