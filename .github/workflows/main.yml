@@ -17,6 +17,8 @@ jobs:
       run: |
           cd api && touch Config.toml
           echo fred_key = '"${{ secrets.FRED_API_KEY }}"' >> Config.toml
+          cat Config.toml
+          pwd Config.toml
     - name: Build
       run: cd api && cargo build --release
     - name: Run
