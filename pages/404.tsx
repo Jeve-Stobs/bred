@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 
-const FourOhFour: NextPage = () => {
+const Custom404: NextPage = () => {
 	return (
 		<div className={styles.error_main}>
 			<div className={styles.error_main_nested}>
@@ -11,4 +11,4 @@ const FourOhFour: NextPage = () => {
 	)
 }
 
-export default FourOhFour
+export default Custom404
