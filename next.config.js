@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')
+
 const nextConfig = {
 	generateBuildId: () => 'build',
 	distDir: 'build',
@@ -8,7 +10,10 @@ const nextConfig = {
 		optimizeImages: true,
 		optimizeCss: true,
 		scrollRestoration: true
+	},
+	pwa: {
+		dest: 'public'
 	}
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)

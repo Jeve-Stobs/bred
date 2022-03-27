@@ -16,6 +16,9 @@
 /build
 /api/node_modules
 /api/data.json
+public/sw.js
+public/workbox-*.js
+public/*.js.map
 
 # misc
 .DS_Store
@@ -28,7 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-api/Config.toml
+/api/Config.toml
 # vercel
 .vercel
 
