@@ -3,28 +3,23 @@ extern crate dotenv_codegen;
 mod utils;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::{
-    fs,
-    fs::File,
-    io::{BufWriter, Write},
-    thread,
-    time::Duration,
-};
+use std::{fs, fs::OpenOptions, io::Write, thread, time::Duration};
 use tracing::info;
 use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
 fn write_to_file() -> std::io::Result<()> {
     // create a new file with the name data.json
-    let f = File::create("data.json")?;
+    let mut f = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .open("data.json")?;
     // get the data from the api
     let data = data::get_data();
-    // create a new writer in buffer
-    let mut writer = BufWriter::new(f);
+    // convert data to [u8]
+    let data_string = serde_json::to_string(&data).unwrap();
     // write the data to the file
-    serde_json::to_writer_pretty(&mut writer, &data)?;
-    // flush the buffer
-    writer.flush()?;
+    f.write_all(data_string.as_bytes())?;
     Ok(())
 }
 
