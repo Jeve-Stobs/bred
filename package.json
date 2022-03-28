@@ -10,12 +10,16 @@
 		"format": "prettier --write --use-tabs true --single-quote true \"**/*.{js,jsx,json,css,tsx}\""
 	},
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.1.1",
+		"@fortawesome/free-solid-svg-icons": "^6.1.1",
+		"@fortawesome/react-fontawesome": "^0.1.18",
 		"critters": "^0.0.16",
-		"next-pwa": "^5.4.6",
 		"next": "12.1.1",
+		"next-pwa": "^5.4.6",
 		"normalize.css": "^8.0.1",
 		"react": "next",
 		"react-dom": "next",
+		"react-smooth-collapse": "^2.1.1",
 		"swr": "^1.2.2"
 	},
 	"devDependencies": {
