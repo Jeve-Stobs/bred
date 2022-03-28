@@ -10,6 +10,7 @@ fn write_to_file() -> std::io::Result<()> {
     // create a new file with the name data.json
     let mut f = OpenOptions::new()
         .write(true)
+        .append(false)
         .create(true)
         .open("data.json")?;
     // get the data from the api
