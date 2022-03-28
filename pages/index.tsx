@@ -1,16 +1,13 @@
 import type { NextPage } from 'next'
 import useSWR from 'swr'
-import SmoothCollapse from 'react-smooth-collapse'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import Error from './_error'
-import { useState } from 'react'
+import Cards from '../components/Cards'
+
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
 	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
-	const [isExpanded, setExpansion] = useState(false)
 	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
@@ -25,39 +22,14 @@ const Home: NextPage = () => {
 					An analysis of recessionary indicators.
 				</div>
 				<div className={styles.grid}>
-					<div className={styles.card}>
-						<div className={styles.icon}>
-							{isExpanded ? (
-								<FontAwesomeIcon icon={faMinus} />
-							) : (
-								<FontAwesomeIcon icon={faPlus} />
-							)}
-						</div>
-						<button
-							className={styles.button}
-							onClick={() => setExpansion(!isExpanded)}
-						>
-							<h2 className={styles.card_title}>
-								Is the yield curve negative?
-							</h2>
-						</button>
-						<SmoothCollapse allowOverflowWhenOpen={true} expanded={isExpanded}>
-							<div className={styles.info}>
-								10Y minus 2Y:&nbsp;
-								<span className={getClassName(spread, previous_spread_close)}>
-									{getFlooredFixed(spread * 100, 2)} bps
-								</span>
-							</div>
-							<div className={styles.card_footer}>
-								{upOrDown(spread, previous_spread_close)}{' '}
-								{getFlooredFixed(
-									Math.abs(spread - previous_spread_close) * 100,
-									2
-								)}{' '}
-								bps from yesterday
-							</div>
-						</SmoothCollapse>
-					</div>
+					<Cards
+						title="Is the yield curve negative?"
+						indicator="10Y minus 2Y"
+						a={spread}
+						b={previous_spread_close}
+						symbol="bps"
+						time="yesterday"
+					/>
 					<div className={styles.card}>
 						<h2 className={styles.card_title}>
 							How&apos;s unemployment doing?
@@ -286,7 +258,6 @@ const Home: NextPage = () => {
 	)
 }
 export default Home
-
 function getPercentageChange(
 	newNum: number,
 	oldNum: number,
