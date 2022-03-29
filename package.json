@@ -14,8 +14,8 @@
 		"next-pwa": "^5.4.6",
 		"next": "12.1.2",
 		"normalize.css": "^8.0.1",
-		"react": "next",
-		"react-dom": "next",
+		"react": "18.0.0",
+		"react-dom": "18.0.0",
 		"swr": "^1.2.2"
 	},
 	"devDependencies": {
