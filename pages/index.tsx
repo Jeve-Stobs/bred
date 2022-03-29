@@ -6,7 +6,7 @@ import Error from './_error'
 
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+	const { data, error } = useSWR('http://localhost:3002/data', fetcher)
 	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
@@ -263,7 +263,13 @@ const Home: NextPage = () => {
 					GitHub&nbsp;|&nbsp;
 				</Link>
 				<i className={styles.footer_info}>
-					Automatically refreshes every 3 minutes
+					New data every 30 seconds. Last updated:{' '}
+					{new Date(parseInt(data.lastupdated)).toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric',
+						hour12: true
+					})}
 				</i>
 			</footer>
 		</div>
