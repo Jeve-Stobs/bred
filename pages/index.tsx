@@ -176,7 +176,13 @@ const Home: NextPage = () => {
 					GitHub&nbsp;|&nbsp;
 				</Link>
 				<i className={styles.footer_info}>
-					Automatically refreshes every 3 minutes
+					New data every 30 seconds. Last updated:{' '}
+					{new Date(parseInt(data.lastupdated)).toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric',
+						hour12: true
+					})}
 				</i>
 			</footer>
 		</div>

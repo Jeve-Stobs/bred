@@ -6,18 +6,16 @@ use tracing_appender::rolling::{RollingFileAppender, Rotation};
 use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
 use utils::{client, data};
 
-fn write_to_file() -> std::io::Result<()> {
-    // create a new file with the name data.json
+fn write_to_file() -> Result<(), Box<dyn std::error::Error>> {
+    let data = data::get_data();
+    let data_string = serde_json::to_string(&data).unwrap();
     let mut f = OpenOptions::new()
         .write(true)
+        .truncate(true)
         .create(true)
-        .open("data.json")?;
-    // get the data from the api
-    let data = data::get_data();
-    // convert data to [u8]
-    let data_string = serde_json::to_string(&data).unwrap();
-    // write the data to the file
-    f.write_all(data_string.as_bytes())?;
+        .open("data.json")
+        .unwrap();
+    f.write_all(data_string.as_bytes()).unwrap();
     Ok(())
 }
 

@@ -1,5 +1,6 @@
 use crate::utils::{fetcher, scraper};
 use serde_json::json;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 pub fn get_data() -> serde_json::Value {
     let to_fetch = vec![
@@ -97,6 +98,10 @@ pub fn get_data() -> serde_json::Value {
             "old": values[9][values[9].len() - 12],
             "lastMonth": values[9][values[9].len() - 2],
         },
+        "lastupdated": SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_millis().to_string()
     });
     return data;
 }
