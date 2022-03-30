@@ -1,15 +1,16 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import SmoothCollapse from 'react-smooth-collapse'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
 
 type CardProps = {
 	title: string
 	indicator: string
 	a: number
 	b: number
+	main: any
+	footer: any
 	symbol: string
 	time: string
 }
@@ -19,6 +20,8 @@ const Card: FunctionComponent<CardProps> = ({
 	indicator,
 	a,
 	b,
+	main,
+	footer,
 	symbol,
 	time
 }) => {
@@ -37,30 +40,21 @@ const Card: FunctionComponent<CardProps> = ({
 			</button>
 			<SmoothCollapse allowOverflowWhenOpen={true} expanded={show}>
 				<div className={styles.info}>
-					{indicator}:&nbsp;
+					{indicator}&nbsp;
 					<span className={getClassName(a, b)}>
-						{getFlooredFixed(a * 100, 2)} {symbol}
+						{main}
+						{symbol == 'bps' ? ` ${symbol}` : symbol}
 					</span>
 				</div>
 				<div className={styles.card_footer}>
-					{upOrDown(a, b)} {getFlooredFixed(Math.abs(a - b) * 100, 2)} {symbol}{' '}
-					from {time}
+					{upOrDown(a, b)} {footer}
+					{symbol == 'bps' ? ` ${symbol}` : symbol} from {time}
 				</div>
 			</SmoothCollapse>
 		</div>
 	)
 }
 export default Card
-function getPercentageChange(
-	newNum: number,
-	oldNum: number,
-	absolute: boolean
-) {
-	if (absolute) {
-		return Math.abs(((newNum - oldNum) / oldNum) * 100)
-	}
-	return ((newNum - oldNum) / oldNum) * 100
-}
 
 function getClassName(a: number, b: number) {
 	if (a === b) {
@@ -80,9 +74,4 @@ function upOrDown(a: number, b: number) {
 		return 'Up'
 	}
 	return 'Down'
-}
-
-/* https://stackoverflow.com/a/36862114/15698722 */
-function getFlooredFixed(v: number, d: number) {
-	return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)
 }
