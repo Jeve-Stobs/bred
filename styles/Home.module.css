@@ -79,11 +79,29 @@
 	border: 1px solid #eaeaea;
 	border-radius: 10px;
 	transition: color 0.15s ease, border-color 0.15s ease;
-	max-width: 300px;
+	width: 300px;
+	position: relative;
+}
+.icon {
+	font-size: 1.8rem;
+	position: absolute;
+	top: 50%;
+	left: 90%;
+	transform: translate(-50%, -50%);
 }
 .card_title {
 	font-family: bold-text, sans-serif;
 	font-size: 1.3rem;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: flex;
+	-webkit-justify-content: space-between;
+	-moz-box-pack: justify;
+	justify-content: space-between;
+	-webkit-align-items: center;
+	-moz-box-align: center;
+	align-items: center;
+	cursor: pointer;
 }
 .card_footer {
 	color: grey;
