@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useState } from 'react'
+import {
+	FunctionComponent,
+	Dispatch,
+	useState,
+	useEffect,
+	SetStateAction
+} from 'react'
 import styles from '../styles/Home.module.css'
 import SmoothCollapse from 'react-smooth-collapse'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,7 +31,8 @@ const Card: FunctionComponent<CardProps> = ({
 	symbol,
 	time
 }) => {
-	const [show, setShow] = useState(false)
+	const [show, setShow] = useStickyState(false, 'show')
+
 	return (
 		<div className={styles.card}>
 			<button className={styles.button} onClick={() => setShow(!show)}>
@@ -54,6 +61,7 @@ const Card: FunctionComponent<CardProps> = ({
 		</div>
 	)
 }
+
 export default Card
 
 function getClassName(a: number, b: number) {
@@ -74,4 +82,17 @@ function upOrDown(a: number, b: number) {
 		return 'Up'
 	}
 	return 'Down'
+}
+function useStickyState<T>(
+	defaultValue: T,
+	key: string
+): [T, Dispatch<SetStateAction<T>>] {
+	const [value, setValue] = useState(() => {
+		const stickyValue = window.localStorage.getItem(key)
+		return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue
+	})
+	useEffect(() => {
+		window.localStorage.setItem(key, JSON.stringify(value))
+	}, [key, value])
+	return [value, setValue]
 }

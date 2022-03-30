@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import Error from './_error'
-import Cards from '../components/Cards'
+import Cards from '../components/Card'
 
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
