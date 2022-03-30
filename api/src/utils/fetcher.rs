@@ -11,7 +11,6 @@ pub fn get_observations(series_id: &str) -> Response {
         Ok(resp) => resp,
         Err(msg) => {
             println!("{}", msg);
-            assert_eq!(2, 1);
             return Response::default();
         }
     };
