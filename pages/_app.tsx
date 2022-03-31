@@ -11,7 +11,7 @@ export default function App(props: AppProps) {
 			<Head>
 				<meta
 					name="viewport"
-					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 				/>
 				<title>
 					Is the party over? | An analysis of recessionary indicators
@@ -42,6 +42,11 @@ export default function App(props: AppProps) {
 					href="/apple/safari-pinned-tab.svg"
 					color="#262322"
 				/>
+				<meta
+					name="description"
+					content="A data aggregation tool built to gauge the health of financial markets"
+				/>
+
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:url" content="https://bred.jevestobs.dev" />
 				<meta
