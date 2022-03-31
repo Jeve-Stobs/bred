@@ -12,7 +12,11 @@ const nextConfig = {
 		scrollRestoration: true
 	},
 	pwa: {
-		dest: 'public'
+		dest: 'public',
+		buildExcludes: [
+			/middleware-build-manifest.js$/,
+			/middleware-react-loadable-manifest.js$/
+		]
 	},
 	enabled: true
 }
