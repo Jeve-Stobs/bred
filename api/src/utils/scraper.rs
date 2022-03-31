@@ -17,5 +17,9 @@ pub fn wsj_bond(url: &str, selector: &str) -> String {
         .flatten()
         .map(|text| text.to_string())
         .collect();
-    yields[0].to_string().replace("%", "")
+    if yields.len() > 0 {
+        yields[0].replace("%", "")
+    } else {
+        "".to_string()
+    }
 }

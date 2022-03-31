@@ -62,7 +62,6 @@ pub fn get_data() -> serde_json::Value {
             "fudged": values[0][values[0].len() - 1],
             "real": values[1][values[1].len() - 1],
             "lastMonth": values[0][values[0].len() - 2],
-
         },
         "cpi" : {
             "new": values[2][values[2].len() - 1],
@@ -103,5 +102,5 @@ pub fn get_data() -> serde_json::Value {
         .unwrap()
         .as_millis().to_string()
     });
-    return data;
+    data
 }
