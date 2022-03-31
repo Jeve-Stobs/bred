@@ -11,10 +11,6 @@ const nextConfig = {
 		optimizeCss: true,
 		scrollRestoration: true
 	},
-	i18n: {
-		locales: ['en'],
-		defaultLocale: 'en'
-	},
 	pwa: {
 		dest: 'public',
 		buildExcludes: [
