@@ -9,11 +9,11 @@ pub fn get_data() -> serde_json::Value {
         "cpiaucsl",
         "dfii10",
         "usepuindxd",
-        "smu06000004244530001",
         "icsa",
         "payems",
-        "stlppmdef",
         "pcepi",
+        "mortgage30us",
+        "emratio",
     ];
     let mut obs = Vec::new();
     for i in to_fetch {
@@ -76,26 +76,26 @@ pub fn get_data() -> serde_json::Value {
             "new": values[4][values[4].len() - 1],
             "old": values[4][values[4].len() - 2],
         },
-        "alcohol": {
+        "claims": {
             "new": values[5][values[5].len() - 1],
             "old": values[5][values[5].len() - 2],
         },
-        "claims": {
+        "payroll": {
             "new": values[6][values[6].len() - 1],
             "old": values[6][values[6].len() - 2],
         },
-        "payroll": {
+        "inflation": {
             "new": values[7][values[7].len() - 1],
-            "old": values[7][values[7].len() - 2],
+            "old": values[7][values[7].len() - 12],
+            "lastMonth": values[7][values[7].len() - 2],
         },
-        "deflation": {
+        "mortgage30us": {
             "new": values[8][values[8].len() - 1],
             "old": values[8][values[8].len() - 2],
         },
-        "inflation": {
+        "emratio": {
             "new": values[9][values[9].len() - 1],
-            "old": values[9][values[9].len() - 12],
-            "lastMonth": values[9][values[9].len() - 2],
+            "old": values[9][values[9].len() - 2],
         },
         "lastupdated": SystemTime::now()
         .duration_since(UNIX_EPOCH)

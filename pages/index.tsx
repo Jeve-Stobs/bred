@@ -7,7 +7,7 @@ import Cards from '../components/Card'
 
 const Home: NextPage = () => {
 	const fetcher = (url: string) => fetch(url).then((r) => r.json())
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
+	const { data, error } = useSWR('http://localhost:3002/data', fetcher)
 	if (!data) return <div></div>
 	if (error) return <Error />
 	const spread = data.US10Y.value - data.US02Y.value
@@ -39,10 +39,10 @@ const Home: NextPage = () => {
 						indicator="Unemployment rate:"
 						a={data.unemployment.fudged}
 						b={data.unemployment.lastMonth}
-						main={getFlooredFixed(spread * 100, 2)}
+						main={data.unemployment.fudged}
 						footer={Math.round(
 							Math.abs(data.unemployment.fudged - data.unemployment.lastMonth) *
-								100
+								10
 						)}
 						symbol="bps"
 						time="last month"
@@ -100,13 +100,17 @@ const Home: NextPage = () => {
 						time="yesterday"
 					/>
 					<Cards
-						title="Are non-essential employees still employed?"
-						indicator="Adult beverage employees in CA:"
-						a={data.alcohol.new}
-						b={data.alcohol.old}
-						main={data.alcohol.new}
-						footer={data.alcohol.new - data.alcohol.old}
-						symbol="k"
+						title="What ratio of the population is working?"
+						indicator="Employment to population ratio:"
+						a={data.emratio.new}
+						b={data.emratio.old}
+						main={data.emratio.new}
+						footer={getPercentageChange(
+							data.emratio.new,
+							data.emratio.old,
+							true
+						).toFixed(1)}
+						symbol="%"
 						time="last month"
 					/>
 					<Cards
@@ -134,18 +138,19 @@ const Home: NextPage = () => {
 						time="last month"
 					/>
 					<Cards
-						title="What's the chance that the USD will deflate?"
-						indicator="Deflation probability:"
-						a={data.deflation.new}
-						b={data.deflation.old}
-						main={data.deflation.new}
-						footer={getPercentageChange(
-							data.deflation.new,
-							data.deflation.old,
-							true
-						).toFixed(1)}
+						title="What's the current 30 year mortgage rate?"
+						indicator="30-Year Fixed Rate Mortgage Avg:"
+						a={data.mortgage30us.new}
+						b={data.mortgage30us.old}
+						main={data.mortgage30us.new}
+						footer={String(
+							getFlooredFixed(
+								Math.abs(data.mortgage30us.new - data.mortgage30us.old),
+								2
+							)
+						)}
 						symbol="%"
-						time="last month"
+						time="last thursday"
 					/>
 					<Cards
 						title="Key inflation (PCEPI)"
