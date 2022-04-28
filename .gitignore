@@ -24,6 +24,7 @@ public/*.js.map
 # misc
 .DS_Store
 *.pem
+cd atest/
 
 # debug
 npm-debug.log*
@@ -44,3 +45,4 @@ yarn-error.log*
 
 /api/target
 /api/cargo.lock
+/api/.cargo
