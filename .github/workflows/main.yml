@@ -56,6 +56,7 @@ jobs:
           pwd Config.toml
 
       - name: Build app using fleet
+        working-directory: api
         run: fleet build
 
       - name: Run app for one minute
