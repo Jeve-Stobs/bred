@@ -55,7 +55,7 @@ const Card: FunctionComponent<CardProps> = ({
 				</div>
 				<div className={styles.card_footer}>
 					{upOrDown(a, b)} {footer}
-					{symbol == 'bps' ? ` ${symbol}` : symbol} from {time}
+					{symbol == 'bps' ? ` ${symbol}` : symbol} since {time}
 				</div>
 			</SmoothCollapse>
 		</div>
@@ -83,6 +83,7 @@ function upOrDown(a: number, b: number) {
 	}
 	return 'Down'
 }
+
 function useStickyState<T>(
 	defaultValue: T,
 	key: string
