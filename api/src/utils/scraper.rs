@@ -1,7 +1,7 @@
 // importation syntax
 use scraper::{Html, Selector};
 
-pub fn wsj_bond(url: &str, selector: &str) -> String {
+pub fn wsj(url: &str, selector: &str) -> String {
     let resp = reqwest::blocking::get(url).unwrap();
     assert!(resp.status().is_success());
     // get the body of the response
@@ -11,14 +11,14 @@ pub fn wsj_bond(url: &str, selector: &str) -> String {
     // parses based on a CSS selector
     let selector = Selector::parse(selector).unwrap();
     // iterate over elements matching our selector and return their text
-    let yields: Vec<String> = fragment
+    let scraped: Vec<String> = fragment
         .select(&selector)
-        .map(|bond| bond.text().collect::<Vec<_>>())
+        .map(|item| item.text().collect::<Vec<_>>())
         .flatten()
         .map(|text| text.to_string())
         .collect();
-    if yields.len() > 0 {
-        yields[0].replace("%", "")
+    if scraped.len() > 0 {
+        scraped[0].replace("%", "")
     } else {
         "".to_string()
     }
