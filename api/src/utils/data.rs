@@ -14,6 +14,14 @@ pub fn get_data() -> serde_json::Value {
         "pcepi",
         "mortgage30us",
         "emratio",
+        "recprousm156n",
+        "a191rl1q225sbea",
+        "walcl",
+    ];
+    let wsj_to_fetch = vec![
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
+        "https://www.wsj.com/market-data/quotes/index/VIX",
     ];
     let mut obs = Vec::new();
     for i in to_fetch {
@@ -29,34 +37,28 @@ pub fn get_data() -> serde_json::Value {
         }
         values.push(v);
     }
-    let ten_year = scraper::wsj_bond(
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
-        "#quote_val",
-    );
-    let ten_year = ten_year.parse::<f64>().unwrap();
-    let ten_year_change = scraper::wsj_bond(
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
-        "#quote_change",
-    );
-    let ten_year_change = ten_year_change.parse::<f64>().unwrap();
-    let two_year = scraper::wsj_bond(
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
-        "#quote_val",
-    );
-    let two_year = two_year.parse::<f64>().unwrap();
-    let two_year_change = scraper::wsj_bond(
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
-        "#quote_change",
-    );
-    let two_year_change = two_year_change.parse::<f64>().unwrap();
+    // loop through wsj_to_fetch and fetch the quote_value as well as the quote_change and push them to a vector
+    let mut wsj_values = Vec::new();
+    for url in wsj_to_fetch {
+        let mut v = Vec::new();
+        let quote_value = scraper::wsj(url, "#quote_val").parse::<f64>().unwrap();
+        let quote_change = scraper::wsj(url, "#quote_change").parse::<f64>().unwrap();
+        v.push(quote_value);
+        v.push(quote_change);
+        wsj_values.push(v);
+    }
     let data = json!({
-        "US02Y": {
-            "previous": two_year - two_year_change,
-            "value": two_year,
+        "US10Y": {
+            "previous": wsj_values[0][0] - wsj_values[0][1],
+            "value": wsj_values[0][0],
         },
-          "US10Y": {
-            "previous": ten_year - ten_year_change,
-            "value": ten_year,
+        "US02Y": {
+            "previous": wsj_values[1][0] - wsj_values[1][1],
+            "value": wsj_values[1][0],
+        },
+        "vix" : {
+            "previous": wsj_values[2][0] - wsj_values[2][1],
+            "value": wsj_values[2][0],
         },
         "unemployment": {
             "fudged": values[0][values[0].len() - 1],
@@ -68,7 +70,7 @@ pub fn get_data() -> serde_json::Value {
             "old": values[2][values[2].len() - 13],
             "lastMonth": values[2][values[2].len() - 2],
         },
-        "realRates": {
+        "rates": {
             "new": values[3][values[3].len() - 1],
             "old": values[3][values[3].len() - 2],
         },
@@ -96,6 +98,18 @@ pub fn get_data() -> serde_json::Value {
         "emratio": {
             "new": values[9][values[9].len() - 1],
             "old": values[9][values[9].len() - 2],
+        },
+        "recp" : {
+            "new": values[10][values[10].len() - 1],
+            "old": values[10][values[10].len() - 2],
+        },
+        "realgdp" : {
+            "new": values[11][values[11].len() - 1],
+            "old": values[11][values[11].len() - 2],
+        },
+        "balancesheet" : {
+            "new": values[12][values[12].len() - 1],
+            "old": values[12][values[12].len() - 2],
         },
         "lastupdated": SystemTime::now()
         .duration_since(UNIX_EPOCH)
