@@ -19,8 +19,8 @@ pub fn get_data() -> serde_json::Value {
         "walcl",
     ];
     let wsj_to_fetch = vec![
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y/historical-prices",
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y/historical-prices",
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y",
+        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y",
         "https://www.wsj.com/market-data/quotes/index/VIX",
     ];
     let mut obs = Vec::new();
