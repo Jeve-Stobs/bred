@@ -184,7 +184,7 @@ const Home: NextPage = () => {
 						a={data.recp.new}
 						b={data.recp.old}
 						main={data.recp.new}
-						footer={Math.abs(data.recp.new - data.recp.old)}
+						footer={getFlooredFixed(Math.abs(data.recp.new - data.recp.old), 2)}
 						symbol="bps"
 						time="last month"
 					/>
