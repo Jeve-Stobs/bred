@@ -103,6 +103,11 @@
 	align-items: center;
 	cursor: pointer;
 }
+.citation_title {
+	font-family: 'Segoe UI', sans-serif;
+	font-weight: 400;
+	font-size: small;
+}
 .card_footer {
 	color: grey;
 	font-style: oblique;

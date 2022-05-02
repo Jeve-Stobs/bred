@@ -222,6 +222,9 @@ const Home: NextPage = () => {
 				>
 					GitHub&nbsp;|&nbsp;
 				</Link>
+				<Link href="/citations" passHref>
+					Citations&nbsp;|&nbsp;
+				</Link>
 				<i className={styles.footer_info}>
 					New data every 30 seconds. Last updated:{' '}
 					{new Date(parseInt(data.lastupdated)).toLocaleString('en-US', {
