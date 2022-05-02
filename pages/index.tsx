@@ -76,12 +76,10 @@ const Home: NextPage = () => {
 					<Cards
 						title="Interest rates (inflation indexed)"
 						indicator="Real rates:"
-						a={data.realRates.old}
-						b={data.realRates.new}
-						main={data.realRates.new}
-						footer={Math.abs(data.realRates.new - data.realRates.old).toFixed(
-							2
-						)}
+						a={data.rates.old}
+						b={data.rates.new}
+						main={data.rates.new}
+						footer={Math.abs(data.rates.new - data.rates.old).toFixed(2)}
 						symbol="%"
 						time="yesterday"
 					/>
@@ -95,7 +93,17 @@ const Home: NextPage = () => {
 							data.policy.new,
 							data.policy.old,
 							true
-						).toFixed(1)}
+						).toFixed(2)}
+						symbol="bps"
+						time="yesterday"
+					/>
+					<Cards
+						title="Market expectation of near term volatility"
+						indicator="CBOE VIX:"
+						a={data.vix.value}
+						b={data.vix.previous}
+						main={data.vix.value}
+						footer={Math.abs(data.vix.value - data.vix.previous).toFixed(2)}
 						symbol="bps"
 						time="yesterday"
 					/>
@@ -170,6 +178,40 @@ const Home: NextPage = () => {
 						symbol="%"
 						time="last month"
 					/>
+					<Cards
+						title="Smoothed Recession Probabilities"
+						indicator="Recession Probability:"
+						a={data.recp.new}
+						b={data.recp.old}
+						main={data.recp.new}
+						footer={Math.abs(data.recp.new - data.recp.old)}
+						symbol="bps"
+						time="last month"
+					/>
+					<Cards
+						title="Fed's Balance Sheet"
+						indicator="Total Assets Less Eliminations from Consolidation:"
+						a={data.balancesheet.new}
+						b={data.balancesheet.old}
+						main={Intl.NumberFormat('en', { notation: 'compact' }).format(
+							data.balancesheet.new * 1000000
+						)}
+						footer={Intl.NumberFormat('en', { notation: 'compact' }).format(
+							Math.abs(data.balancesheet.new - data.balancesheet.old) * 1000000
+						)}
+						symbol=""
+						time="last wednesday"
+					/>
+					<Cards
+						title="Real GDP"
+						indicator="GDP Inflation Indexed:"
+						a={data.realgdp.new}
+						b={data.realgdp.old}
+						main={data.realgdp.new}
+						footer={Math.abs(data.realgdp.new - data.realgdp.old)}
+						symbol="bps"
+						time="last quarter"
+					/>
 				</div>
 			</main>
 
@@ -198,9 +240,9 @@ export default Home
 function getPercentageChange(
 	newNum: number,
 	oldNum: number,
-	absolute: boolean
+	isAbsolute: boolean
 ) {
-	if (absolute) {
+	if (isAbsolute) {
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}
 	return ((newNum - oldNum) / oldNum) * 100
