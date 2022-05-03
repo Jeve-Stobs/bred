@@ -220,10 +220,10 @@ const Home: NextPage = () => {
 					href="https://github.com/Jeve-Stobs/bred?ref=bred.jevestobs.dev"
 					passHref
 				>
-					GitHub&nbsp;|&nbsp;
+					GitHub
 				</Link>
 				<Link href="/citations" passHref>
-					Citations&nbsp;|&nbsp;
+					&nbsp;Citations&nbsp;
 				</Link>
 				<i className={styles.footer_info}>
 					New data every 30 seconds. Last updated:{' '}
