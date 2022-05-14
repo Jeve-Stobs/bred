@@ -10,7 +10,7 @@ pub fn get_observations(series_id: &str) -> Response {
     let resp: Response = match c.series_observation(series_id, Some(builder)) {
         Ok(resp) => resp,
         Err(msg) => {
-            println!("{}", msg);
+            dbg!("{}", msg);
             return Response::default();
         }
     };

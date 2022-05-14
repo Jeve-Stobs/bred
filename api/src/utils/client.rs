@@ -16,7 +16,7 @@ pub fn make_client() -> FredClient {
     let mut c = match FredClient::new() {
         Ok(c) => c,
         Err(msg) => {
-            println!("{}", msg);
+            dbg!("{}", msg);
             return FredClient::new().unwrap();
         }
     };
