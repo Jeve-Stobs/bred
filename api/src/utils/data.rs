@@ -25,7 +25,7 @@ pub fn get_data() -> serde_json::Value {
     ];
     let mut obs = Vec::new();
     for i in to_fetch {
-        let obs_i = fetcher::get_observations(i);
+        let obs_i = fetcher::get_observations(i, "2021-01-01");
         obs.push(obs_i);
     }
     // push each observation in it's own vector and fetch the value

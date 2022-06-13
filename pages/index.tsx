@@ -253,5 +253,5 @@ function getPercentageChange(
 
 /* https://stackoverflow.com/a/36862114/15698722 */
 function getFlooredFixed(v: number, d: number) {
-	return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)
+	return (~~(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)
 }

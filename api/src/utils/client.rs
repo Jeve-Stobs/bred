@@ -13,13 +13,7 @@ fn read_config() -> std::io::Result<Config> {
 }
 
 pub fn make_client() -> FredClient {
-    let mut c = match FredClient::new() {
-        Ok(c) => c,
-        Err(msg) => {
-            dbg!("{}", msg);
-            return FredClient::new().unwrap();
-        }
-    };
+    let mut c = FredClient::new().unwrap();
     c.with_key(&read_config().unwrap().fred_key);
-    return c;
+    c
 }
