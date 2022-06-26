@@ -193,12 +193,8 @@ const Home: NextPage = () => {
 						indicator="Total Assets Less Eliminations from Consolidation:"
 						a={data.balancesheet.new}
 						b={data.balancesheet.old}
-						main={Intl.NumberFormat('en', { notation: 'compact' }).format(
-							data.balancesheet.new * 1000000
-						)}
-						footer={Intl.NumberFormat('en', { notation: 'compact' }).format(
-							Math.abs(data.balancesheet.new - data.balancesheet.old) * 1000000
-						)}
+						main={getNumberFormat(data.balancesheet.new)}
+						footer={getNumberFormat(data.balancesheet.new - data.balancesheet.old)}
 						symbol=""
 						time="last wednesday"
 					/>
@@ -211,6 +207,30 @@ const Home: NextPage = () => {
 						footer={Math.abs(data.realgdp.new - data.realgdp.old)}
 						symbol="bps"
 						time="last quarter"
+					/>
+					<Cards
+						title="Consumer Lending"
+						indicator="Consumer Loans:"
+						a={data.consumer.new}
+						b={data.consumer.old}
+						main={getNumberFormat(data.consumer.new * 1000)}
+						footer={getNumberFormat(data.consumer.new - data.consumer.old)}
+						symbol=""
+						time="last week"
+					/>
+					<Cards
+						title="Personal Saving Rate"
+						indicator="Personal Savings Rate:"
+						a={data.personal.new}
+						b={data.personal.old}
+						main={data.personal.new}
+						footer={getPercentageChange(
+							data.personal.new,
+							data.personal.old,
+							true
+						).toPrecision(2)}
+						symbol="%"
+						time="last month"
 					/>
 				</div>
 			</main>
@@ -249,6 +269,12 @@ function getPercentageChange(
 		return Math.abs(((newNum - oldNum) / oldNum) * 100)
 	}
 	return ((newNum - oldNum) / oldNum) * 100
+}
+
+function getNumberFormat(num: number) {
+	return Intl.NumberFormat('en', { notation: 'compact' }).format(
+		Math.abs(num) * 1000000
+	)
 }
 
 /* https://stackoverflow.com/a/36862114/15698722 */

@@ -55,7 +55,7 @@ const Card: FunctionComponent<CardProps> = ({
 				</div>
 				<div className={styles.card_footer}>
 					{upOrDown(a, b)} {footer}
-					{symbol == 'bps' ? ` ${symbol}` : symbol} since {time}
+					{symbol == 'bps' ? ` ${symbol}` : symbol} from {time}
 				</div>
 			</SmoothCollapse>
 		</div>
