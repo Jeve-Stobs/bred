@@ -100,6 +100,18 @@ const Citations: NextPage = () => {
 						charts - WSJ. The Wall Street Journal. Retrieved May 2, 2022, from
 						https://www.wsj.com/market-data/quotes/index/VIX
 					</h2>
+					<h2 className={styles.citation_title}>
+						Board of Governors of the Federal Reserve System (US), Consumer
+						Loans: Credit Cards and Other Revolving Plans, All Commercial Banks
+						[CCLACBW027SBOG], retrieved from FRED, Federal Reserve Bank of St.
+						Louis; https://fred.stlouisfed.org/series/CCLACBW027SBOG, June 27,
+						2022.
+					</h2>
+					<h2 className={styles.citation_title}>
+						U.S. Bureau of Economic Analysis, Personal Saving Rate [PSAVERT],
+						retrieved from FRED, Federal Reserve Bank of St. Louis;
+						https://fred.stlouisfed.org/series/PSAVERT, June 28, 2022.
+					</h2>
 				</div>
 			</main>
 		</div>
