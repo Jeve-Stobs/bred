@@ -7,7 +7,6 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	experimental: {
-		optimizeImages: true,
 		optimizeCss: true,
 		scrollRestoration: true
 	},

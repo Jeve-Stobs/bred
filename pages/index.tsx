@@ -194,7 +194,9 @@ const Home: NextPage = () => {
 						a={data.balancesheet.new}
 						b={data.balancesheet.old}
 						main={getNumberFormat(data.balancesheet.new)}
-						footer={getNumberFormat(data.balancesheet.new - data.balancesheet.old)}
+						footer={getNumberFormat(
+							data.balancesheet.new - data.balancesheet.old
+						)}
 						symbol=""
 						time="last wednesday"
 					/>
