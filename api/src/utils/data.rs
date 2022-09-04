@@ -63,8 +63,8 @@ pub fn get_data() -> serde_json::Value {
             "value": wsj_values[2][0],
         },
         "unemployment": {
-            "fudged": values[0][values[0].len() - 1],
-            "real": values[1][values[1].len() - 1],
+            "unrate": values[0][values[0].len() - 1],
+            "u6rate": values[1][values[1].len() - 1],
             "lastMonth": values[0][values[0].len() - 2],
         },
         "cpi" : {
