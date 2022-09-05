@@ -24,16 +24,16 @@ const Home: NextPage = () => {
 	}
 
 	client.onopen = function () {
-		console.log('[WebSockets] Client Connected')
+		console.info('[WebSockets] Client Connected')
 	}
 
 	client.onclose = function () {
-		console.log('[Websockets] Client Closed')
+		console.info('[Websockets] Client Closed')
 	}
 
 	client.onmessage = function (e: any) {
 		if (typeof e.data === 'string') {
-			//console.log('[Websockets] Received: ' + e.data)
+			//console.debug('[Websockets] Received: ' + e.data)
 			const data = JSON.parse(e.data)
 			setData(data)
 		}
