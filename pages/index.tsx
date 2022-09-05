@@ -1,12 +1,13 @@
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import Error from './_error'
 import Cards from '../components/Card'
 import { w3cwebsocket } from 'websocket'
 
-const client = new w3cwebsocket('ws://localhost:3002/ws')
+const client = new w3cwebsocket('ws://api.jevestobs.dev/ws')
 
 const Home: NextPage = () => {
 	const [data, setData] = useState<any>()
@@ -38,7 +39,31 @@ const Home: NextPage = () => {
 		}
 	}
 	if (data == null) {
-		return <div>loading</div>
+		return (
+			<div className={styles.container}>
+				<main className={styles.main}>
+					<h1 className={styles.title}>Is the party over?</h1>
+
+					<div className={styles.description}>
+						An analysis of recessionary indicators.
+					</div>
+					<div className={styles.grid}>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+					</div>
+				</main>
+			</div>
+		)
 	}
 	return (
 		<div className={styles.container}>
