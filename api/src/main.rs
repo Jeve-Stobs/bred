@@ -1,10 +1,14 @@
 mod utils;
 use actix_cors::Cors;
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::{fs, fs::OpenOptions, io::Write, thread, time::Duration};
+use actix_web::{get, web, App, Error, HttpRequest, HttpResponse, HttpServer};
+use actix_web_actors::ws;
+use paris::success;
+use std::{fs::OpenOptions, io::Write, thread, time::Duration};
 use tracing_appender::rolling::{RollingFileAppender, Rotation};
 use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
-use utils::{client, data};
+
+use self::server::MyWebSocket;
+use utils::{client, data, server};
 
 fn write_to_file() -> Result<(), Box<dyn std::error::Error>> {
     let data = serde_json::to_string(&data::get_data()).unwrap();
@@ -18,15 +22,12 @@ fn write_to_file() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-async fn index() -> impl Responder {
-    // initialize json file
-    let path = "./data.json";
-    // read file and parse to string
-    let data = fs::read_to_string(path).expect("Unable to read file");
-    // deserialize json string to struct
-    let res: serde_json::Value = serde_json::from_str(&data).unwrap();
-    // return json response
-    HttpResponse::Ok().json(res)
+/// WebSocket handshake and start `MyWebSocket` actor.
+#[get("/ws")]
+async fn data_ws(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
+    let myws = MyWebSocket::new();
+    let resp = ws::start(myws, &req, stream)?;
+    Ok(resp)
 }
 
 #[actix_web::main]
@@ -56,7 +57,7 @@ async fn main() -> std::io::Result<()> {
         );
     tracing::subscriber::set_global_default(subscriber).unwrap();
     // send heartbeat msg
-    println!("❤️ listening on port 3002");
+    success!("❤️ listening on port 3002");
     // prep http server
     HttpServer::new(|| {
         let cors = Cors::default() // <- Construct CORS middleware builder)
@@ -66,7 +67,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(tracing_actix_web2::Tracer)
             .wrap(cors)
-            .route("/data", web::get().to(index))
+            .service(data_ws)
     })
     .bind(("0.0.0.0", 3002))?
     .run()

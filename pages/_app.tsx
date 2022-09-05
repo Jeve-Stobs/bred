@@ -16,14 +16,6 @@ export default function App(props: AppProps) {
 				<title>
 					Is the party over? | An analysis of recessionary indicators
 				</title>
-				<link rel="preconnect" href="https://api.jevestobs.dev/data" />
-				<link rel="dns-prefetch" href="https://api.jevestobs.dev/data" />
-				<link
-					rel="preload"
-					href="https://api.jevestobs.dev/data"
-					as="fetch"
-					crossOrigin="anonymous"
-				/>
 				<meta
 					name="application-name"
 					content="Is the party over? | An of analysis of recessionary indicators"

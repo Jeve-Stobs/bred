@@ -1,17 +1,70 @@
 import type { NextPage } from 'next'
-import useSWR from 'swr'
+import { useState, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import Error from './_error'
 import Cards from '../components/Card'
+import { w3cwebsocket } from 'websocket'
+
+const client = new w3cwebsocket('wss://api.jevestobs.dev/ws')
 
 const Home: NextPage = () => {
-	const fetcher = (url: string) => fetch(url).then((r) => r.json())
-	const { data, error } = useSWR('https://api.jevestobs.dev/data', fetcher)
-	if (!data) return <div></div>
-	if (error) return <Error />
-	const spread = data.US10Y.value - data.US02Y.value
-	const previous_spread_close = data.US10Y.previous - data.US02Y.previous
+	const [data, setData] = useState<any>()
+
+	useEffect(() => {
+		// @ts-ignore
+		const data = JSON.parse(localStorage.getItem('data'))
+		if (data) {
+			setData(data)
+		}
+	}, [])
+	client.onerror = function () {
+		console.error('[Websockets] Connection Error')
+	}
+
+	client.onopen = function () {
+		console.info('[WebSockets] Client Connected')
+	}
+
+	client.onclose = function () {
+		console.info('[Websockets] Client Closed')
+	}
+
+	client.onmessage = function (e: any) {
+		if (typeof e.data === 'string') {
+			//console.debug('[Websockets] Received: ' + e.data)
+			const data = JSON.parse(e.data)
+			setData(data)
+		}
+	}
+	if (data == null) {
+		return (
+			<div className={styles.container}>
+				<main className={styles.main}>
+					<h1 className={styles.title}>Is the party over?</h1>
+
+					<div className={styles.description}>
+						An analysis of recessionary indicators.
+					</div>
+					<div className={styles.grid}>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+						<div className={styles.card}>
+							<Skeleton count={7} />
+						</div>
+					</div>
+				</main>
+			</div>
+		)
+	}
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
@@ -24,11 +77,18 @@ const Home: NextPage = () => {
 					<Cards
 						title="Is the yield curve negative?"
 						indicator="10Y minus 2Y:"
-						a={spread}
-						b={previous_spread_close}
-						main={getFlooredFixed(spread * 100, 2)}
+						a={data.US10Y.value - data.US02Y.value}
+						b={data.US10Y.previous - data.US02Y.previous}
+						main={getFlooredFixed(
+							(data.US10Y.value - data.US02Y.value) * 100,
+							2
+						)}
 						footer={getFlooredFixed(
-							Math.abs(spread - previous_spread_close) * 100,
+							Math.abs(
+								data.US10Y.value -
+									data.US02Y.value -
+									(data.US10Y.previous - data.US02Y.previous)
+							) * 100,
 							2
 						)}
 						symbol="bps"
@@ -37,11 +97,11 @@ const Home: NextPage = () => {
 					<Cards
 						title="How's unemployment doing?"
 						indicator="Unemployment rate:"
-						a={data.unemployment.fudged}
+						a={data.unemployment.unrate}
 						b={data.unemployment.lastMonth}
-						main={data.unemployment.fudged}
+						main={data.unemployment.unrate}
 						footer={Math.round(
-							Math.abs(data.unemployment.fudged - data.unemployment.lastMonth) *
+							Math.abs(data.unemployment.unrate - data.unemployment.lastMonth) *
 								10
 						)}
 						symbol="bps"
