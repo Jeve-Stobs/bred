@@ -7,6 +7,7 @@ use actix::prelude::*;
 use actix_web_actors::ws;
 
 use bytestring::ByteString;
+use paris::{error, info};
 
 use serde::{Deserialize, Serialize};
 
@@ -48,7 +49,7 @@ impl MyWebSocket {
             // check client heartbeats
             if Instant::now().duration_since(act.hb) > CLIENT_TIMEOUT {
                 // heartbeat timed out
-                println!("Websocket Client heartbeat failed, disconnecting!");
+                error!("Websocket Client heartbeat failed, disconnecting!");
 
                 // stop actor
                 ctx.stop();
@@ -88,7 +89,7 @@ impl Actor for MyWebSocket {
 impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWebSocket {
     fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
         // process websocket messages
-        println!("WS: {:?}", msg);
+        info!("WS: {:?}", msg);
         match msg {
             Ok(ws::Message::Ping(msg)) => {
                 self.hb = Instant::now();

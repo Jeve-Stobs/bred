@@ -1,5 +1,6 @@
 use crate::client;
 use fred_rs::series::observation::{Builder, Response};
+use paris::info;
 
 pub fn get_observations(series_id: &str, start_date: &str) -> Response {
     let mut c = client::make_client();
@@ -10,7 +11,7 @@ pub fn get_observations(series_id: &str, start_date: &str) -> Response {
     let resp: Response = match c.series_observation(series_id, Some(builder)) {
         Ok(resp) => resp,
         Err(msg) => {
-            dbg!("{}", msg);
+            info!("{}", msg);
             return Response::default();
         }
     };

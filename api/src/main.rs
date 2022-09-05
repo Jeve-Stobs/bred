@@ -2,6 +2,7 @@ mod utils;
 use actix_cors::Cors;
 use actix_web::{get, web, App, Error, HttpRequest, HttpResponse, HttpServer};
 use actix_web_actors::ws;
+use paris::success;
 use std::{fs::OpenOptions, io::Write, thread, time::Duration};
 use tracing_appender::rolling::{RollingFileAppender, Rotation};
 use tracing_subscriber::{filter::EnvFilter, fmt, layer::SubscriberExt, Registry};
@@ -56,7 +57,7 @@ async fn main() -> std::io::Result<()> {
         );
     tracing::subscriber::set_global_default(subscriber).unwrap();
     // send heartbeat msg
-    println!("❤️ listening on port 3002");
+    success!("❤️ listening on port 3002");
     // prep http server
     HttpServer::new(|| {
         let cors = Cors::default() // <- Construct CORS middleware builder)
