@@ -7,7 +7,7 @@ const withPWA = require('next-pwa')({
 			/middleware-build-manifest.js$/,
 			/middleware-react-loadable-manifest.js$/
 		],
-		disable: true
+		disable: false
 	}),
 	withPreact = require('next-plugin-preact')
 
