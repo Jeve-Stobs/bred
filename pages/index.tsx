@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 import Cards from '../components/Card'
 import { w3cwebsocket } from 'websocket'
 
-const client = new w3cwebsocket('ws://api.jevestobs.dev/ws')
+const client = new w3cwebsocket('wss://api.jevestobs.dev/ws')
 
 const Home: NextPage = () => {
 	const [data, setData] = useState<any>()
