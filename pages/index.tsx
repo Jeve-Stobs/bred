@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
+import { w3cwebsocket } from 'websocket'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 import Cards from '../components/Card'
-import { w3cwebsocket } from 'websocket'
 
 const client = new w3cwebsocket('wss://api.jevestobs.dev/ws')
 
@@ -13,8 +13,7 @@ const Home: NextPage = () => {
 	const [data, setData] = useState<any>()
 
 	useEffect(() => {
-		// @ts-ignore
-		const data = JSON.parse(localStorage.getItem('data'))
+		const data = JSON.parse(localStorage.getItem('data') as string)
 		if (data) {
 			setData(data)
 		}
@@ -81,7 +80,7 @@ const Home: NextPage = () => {
 						b={data.US10Y.previous - data.US02Y.previous}
 						main={getFlooredFixed(
 							(data.US10Y.value - data.US02Y.value) * 100,
-							2
+							3
 						)}
 						footer={getFlooredFixed(
 							Math.abs(
@@ -89,7 +88,7 @@ const Home: NextPage = () => {
 									data.US02Y.value -
 									(data.US10Y.previous - data.US02Y.previous)
 							) * 100,
-							2
+							3
 						)}
 						symbol="bps"
 						time="yesterday"
@@ -214,7 +213,7 @@ const Home: NextPage = () => {
 						footer={String(
 							getFlooredFixed(
 								Math.abs(data.mortgage30us.new - data.mortgage30us.old),
-								2
+								3
 							)
 						)}
 						symbol="%"
@@ -244,7 +243,7 @@ const Home: NextPage = () => {
 						a={data.recp.new}
 						b={data.recp.old}
 						main={data.recp.new}
-						footer={getFlooredFixed(Math.abs(data.recp.new - data.recp.old), 2)}
+						footer={getFlooredFixed(Math.abs(data.recp.new - data.recp.old), 3)}
 						symbol="bps"
 						time="last month"
 					/>
@@ -341,5 +340,6 @@ function getNumberFormat(num: number) {
 
 /* https://stackoverflow.com/a/36862114/15698722 */
 function getFlooredFixed(v: number, d: number) {
-	return (~~(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d)
+	const t = v + ''
+	return t.slice(0, t.indexOf('.') + d)
 }
