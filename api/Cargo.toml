@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 actix = "0.13.0"
-actix-web = "4.1.0"
+actix-web = "4.2.1"
 actix-web-actors= "4.1.0"
 serde = { version = "1.0.144", features = ["derive"] }
 toml = "0.5.9"
