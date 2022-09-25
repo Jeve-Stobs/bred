@@ -54,8 +54,13 @@ const Card: FunctionComponent<CardProps> = ({
 					</span>
 				</div>
 				<div className={styles.card_footer}>
-					{upOrDown(a, b)} {footer}
-					{symbol == 'bps' ? ` ${symbol}` : symbol} from {time}
+					{upOrDown(a, b)} {upOrDown(a, b) == 'UNCH' ? '' : footer}
+					{upOrDown(a, b) == 'UNCH'
+						? ''
+						: symbol == 'bps'
+						? ` ${symbol}`
+						: symbol}{' '}
+					from {time}
 				</div>
 			</SmoothCollapse>
 		</div>

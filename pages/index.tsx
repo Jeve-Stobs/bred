@@ -99,9 +99,9 @@ const Home: NextPage = () => {
 						a={data.unemployment.unrate}
 						b={data.unemployment.lastMonth}
 						main={data.unemployment.unrate}
-						footer={Math.round(
-							Math.abs(data.unemployment.unrate - data.unemployment.lastMonth) *
-								10
+						footer={getFlooredFixed(
+							Math.abs(data.unemployment.unrate - data.unemployment.lastMonth),
+							2
 						)}
 						symbol="bps"
 						time="last month"
@@ -119,16 +119,14 @@ const Home: NextPage = () => {
 						}
 						a={data.cpi.new}
 						b={data.cpi.old}
-						main={getPercentageChange(
-							data.cpi.new,
-							data.cpi.old,
-							false
-						).toFixed(1)}
-						footer={getPercentageChange(
-							data.cpi.new,
-							data.cpi.lastMonth,
-							false
-						).toFixed(1)}
+						main={getFlooredFixed(
+							getPercentageChange(data.cpi.new, data.cpi.old, false),
+							2
+						)}
+						footer={getFlooredFixed(
+							getPercentageChange(data.cpi.new, data.cpi.lastMonth, true),
+							2
+						)}
 						symbol="%"
 						time="last month"
 					/>
@@ -290,6 +288,32 @@ const Home: NextPage = () => {
 							data.personal.old,
 							true
 						).toPrecision(2)}
+						symbol="%"
+						time="last month"
+					/>
+					<Cards
+						title="5y Forward Inflation Expectations"
+						indicator="5y5y Forward Expectations:"
+						a={data.expectations.new}
+						b={data.expectations.old}
+						main={data.expectations.new}
+						footer={getFlooredFixed(
+							Math.abs(data.expectations.new - data.expectations.old),
+							3
+						)}
+						symbol="%"
+						time="last month"
+					/>
+					<Cards
+						title="Credit spreads: HY-OAS"
+						indicator="BofA US High Yield:"
+						a={data.creditspreads.new}
+						b={data.creditspreads.old}
+						main={data.creditspreads.new}
+						footer={getFlooredFixed(
+							Math.abs(data.creditspreads.new - data.creditspreads.old),
+							3
+						)}
 						symbol="%"
 						time="last month"
 					/>

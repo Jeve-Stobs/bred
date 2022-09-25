@@ -19,6 +19,8 @@ pub fn get_data() -> serde_json::Value {
         "walcl",
         "cclacbw027sbog",
         "psavert",
+        "bamlh0a0hym2",
+        "t5yifr"
     ];
     let wsj_to_fetch = vec![
         "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y",
@@ -120,6 +122,15 @@ pub fn get_data() -> serde_json::Value {
         "personal" : {
             "new": values[14][values[14].len() - 1],
             "old": values[14][values[14].len() - 2],
+        },
+        "creditspreads":
+        {
+            "new": values[15][values[15].len() - 1],
+            "old": values[15][values[15].len() - 2],
+        },
+        "expectations": {
+            "new": values[16][values[16].len() - 1],
+            "old": values[16][values[16].len() - 2],
         },
         "lastupdated": SystemTime::now()
         .duration_since(UNIX_EPOCH)
