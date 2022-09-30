@@ -4,8 +4,8 @@ import { w3cwebsocket } from 'websocket'
 import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import 'react-loading-skeleton/dist/skeleton.css'
 import Cards from '../components/Card'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const client = new w3cwebsocket('wss://api.jevestobs.dev/ws')
 
@@ -13,9 +13,16 @@ const Home: NextPage = () => {
 	const [data, setData] = useState<any>()
 
 	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('data') as string)
 		if (data) {
 			setData(data)
+		} else {
+			client.onopen = () => {
+				console.log('WebSocket Client Connected')
+			}
+			client.onmessage = (message) => {
+				const dataFromServer = JSON.parse(message.data.toString())
+				setData(dataFromServer)
+			}
 		}
 	}, [])
 	client.onerror = function () {
