@@ -112,6 +112,18 @@ const Citations: NextPage = () => {
 						retrieved from FRED, Federal Reserve Bank of St. Louis;
 						https://fred.stlouisfed.org/series/PSAVERT, June 28, 2022.
 					</h2>
+					<h2 className={styles.citation_title}>
+						Ice Data Indices, LLC, ICE BofA US High Yield Index Option-Adjusted
+						Spread [BAMLH0A0HYM2], retrieved from FRED, Federal Reserve Bank of
+						St. Louis; https://fred.stlouisfed.org/series/BAMLH0A0HYM2,
+						September 30, 2022.
+					</h2>
+					<h2 className={styles.citation_title}>
+						Federal Reserve Bank of St. Louis, 5-Year, 5-Year Forward Inflation
+						Expectation Rate [T5YIFR], retrieved from FRED, Federal Reserve Bank
+						of St. Louis; https://fred.stlouisfed.org/series/T5YIFR, September
+						30, 2022.
+					</h2>
 				</div>
 			</main>
 		</div>
