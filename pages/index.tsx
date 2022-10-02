@@ -24,7 +24,7 @@ const Home: NextPage = () => {
 				setData(dataFromServer)
 			}
 		}
-	}, [])
+	}, [data])
 	client.onerror = function () {
 		console.error('[Websockets] Connection Error')
 	}
