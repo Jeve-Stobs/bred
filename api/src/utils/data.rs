@@ -89,6 +89,7 @@ pub fn get_data() -> serde_json::Value {
         "payroll": {
             "new": values[6][values[6].len() - 1],
             "old": values[6][values[6].len() - 2],
+            "twoMonthsAgo": values[6][values[6].len() - 3],
         },
         "inflation": {
             "new": values[7][values[7].len() - 1],

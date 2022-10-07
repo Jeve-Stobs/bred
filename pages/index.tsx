@@ -202,10 +202,12 @@ const Home: NextPage = () => {
 						indicator="Total Nonfarm Payroll:"
 						a={data.payroll.new}
 						b={data.payroll.old}
-						main={String(data.payroll.new).substring(0, 3)}
-						footer={String(
-							Math.abs(data.payroll.new - data.payroll.old)
-						).substring(0, 2)}
+						main={String(data.payroll.new - data.payroll.old)}
+						footer={Math.abs(
+							data.payroll.new -
+								data.payroll.old -
+								(data.payroll.old - data.payroll.twoMonthsAgo)
+						)}
 						symbol="k"
 						time="last month"
 					/>
