@@ -7,8 +7,7 @@ import {
 } from 'react'
 import styles from '../styles/Home.module.css'
 import SmoothCollapse from 'react-smooth-collapse'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { Plus, Minus } from 'lucide-react'
 
 type CardProps = {
 	title: string
@@ -38,9 +37,9 @@ const Card: FunctionComponent<CardProps> = ({
 			<button className={styles.button} onClick={() => setShow(!show)}>
 				<div className={styles.icon}>
 					{show ? (
-						<FontAwesomeIcon icon={faMinus} />
+						<Minus size={41} />
 					) : (
-						<FontAwesomeIcon icon={faPlus} />
+						<Plus size={41} />
 					)}
 				</div>
 				<h2 className={styles.card_title}>{title}</h2>
