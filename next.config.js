@@ -2,25 +2,23 @@
  * @type {import('next').NextConfig}
  */
 const withPWA = require('next-pwa')({
-		dest: 'public',
-		buildExcludes: [
-			/middleware-build-manifest.js$/,
-			/middleware-react-loadable-manifest.js$/
-		],
-		disable: false
-	}),
-	withPreact = require('next-plugin-preact')
+	dest: 'public',
+	buildExcludes: [
+		/middleware-build-manifest.js$/,
+		/middleware-react-loadable-manifest.js$/
+	],
+	disable: false
+})
 
-const nextConfig = withPreact(
-	withPWA({
-		distDir: 'build',
-		reactStrictMode: true,
-		swcMinify: true,
-		experimental: {
-			optimizeCss: true,
-			scrollRestoration: true
-		}
-	})
-)
+const nextConfig = withPWA({
+	distDir: 'build',
+	reactStrictMode: true,
+	swcMinify: true,
+	experimental: {
+		optimizeCss: true,
+		enableUndici: true,
+		scrollRestoration: true
+	}
+})
 
 module.exports = nextConfig

@@ -18,13 +18,16 @@
 	border-top: 1px solid #eaeaea;
 	justify-content: center;
 	align-items: center;
-	font-family: bold-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
+	font-weight: 600;
 }
 .footer_info {
 	font-size: 0.95rem;
 	color: grey;
 	font-style: oblique;
-	font-family: light-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
+	margin-right: 0.7rem;
+	margin-left: 0.7rem;
 }
 .title a:hover,
 .title a:focus,
@@ -36,7 +39,7 @@
 	margin: 0;
 	line-height: 1.15;
 	font-size: 4rem;
-	font-family: bold-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
 }
 
 .title,
@@ -50,7 +53,7 @@
 	font-size: 1.5rem;
 	color: grey;
 	font-style: oblique;
-	font-family: light-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
 }
 
 .code {
@@ -90,7 +93,7 @@
 	transform: translate(-50%, -50%);
 }
 .card_title {
-	font-family: bold-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
 	font-size: 1.3rem;
 	display: -webkit-flex;
 	display: -moz-box;
@@ -111,10 +114,11 @@
 .card_footer {
 	color: grey;
 	font-style: oblique;
-	font-family: light-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
 }
 .info {
-	font-family: light-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
+	font-size: 0.95rem;
 	margin-bottom: 1rem;
 }
 .logo {
@@ -123,21 +127,21 @@
 }
 .green {
 	color: #00c805 !important;
-	font-family: light-text, sans-serif !important;
+	font-family: RedHatDisplay-Bold, sans-serif !important;
 	font-weight: bold;
 }
 .red {
 	color: #fa5801 !important;
-	font-family: light-text, sans-serif !important;
+	font-family: RedHatDisplay-Bold, sans-serif !important;
 	font-weight: bold;
 }
 .grey {
 	color: #808080 !important;
-	font-family: light-text, sans-serif !important;
+	font-family: RedHatDisplay-Bold, sans-serif !important;
 	font-weight: bold;
 }
 .error_main {
-	font-family: bold-text, sans-serif;
+	font-family: RedHatDisplay-Bold, sans-serif;
 	display: flex;
 	overflow: hidden;
 	margin-top: 0.5rem;

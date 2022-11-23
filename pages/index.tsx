@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useState, useEffect } from 'react'
 import { w3cwebsocket } from 'websocket'
+import { Github, Quote } from 'lucide-react'
 import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -256,7 +257,7 @@ const Home: NextPage = () => {
 					/>
 					<Cards
 						title="Fed's Balance Sheet"
-						indicator="Total Assets Less Eliminations from Consolidation:"
+						indicator="Total Assets Less Consolidation Eliminations:"
 						a={data.balancesheet.new}
 						b={data.balancesheet.old}
 						main={getNumberFormat(data.balancesheet.new)}
@@ -334,13 +335,10 @@ const Home: NextPage = () => {
 					href="https://github.com/Jeve-Stobs/bred?ref=bred.jevestobs.dev"
 					passHref
 				>
-					GitHub
-				</Link>
-				<Link href="/citations" passHref>
-					&nbsp;Citations&nbsp;
+					<Github />
 				</Link>
 				<i className={styles.footer_info}>
-					New data every 30 seconds. Last updated:{' '}
+					Last updated:{' '}
 					{new Date(parseInt(data.lastupdated)).toLocaleString('en-US', {
 						hour: 'numeric',
 						minute: 'numeric',
@@ -348,6 +346,9 @@ const Home: NextPage = () => {
 						hour12: true
 					})}
 				</i>
+				<Link href="/citations" passHref>
+					<Quote />
+				</Link>
 			</footer>
 		</div>
 	)
