@@ -2,6 +2,9 @@ import '../styles/globals.css'
 import 'normalize.css/normalize.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { Red_Hat_Display } from '@next/font/google'
+
+const hat = Red_Hat_Display({ subsets: ['latin'] })
 
 export default function App(props: AppProps) {
 	const { Component, pageProps } = props
@@ -72,7 +75,10 @@ export default function App(props: AppProps) {
 					content="finance, fed, jerome powell, recession, financial analysis, indicators, charts, graphs, yield curve"
 				/>
 			</Head>
-			<Component {...pageProps} />
+
+			<main className={hat.className}>
+				<Component {...pageProps} />
+			</main>
 		</>
 	)
 }

@@ -36,11 +36,7 @@ const Card: FunctionComponent<CardProps> = ({
 		<div className={styles.card}>
 			<button className={styles.button} onClick={() => setShow(!show)}>
 				<div className={styles.icon}>
-					{show ? (
-						<Minus size={41} />
-					) : (
-						<Plus size={41} />
-					)}
+					{show ? <Minus size={41} /> : <Plus size={41} />}
 				</div>
 				<h2 className={styles.card_title}>{title}</h2>
 			</button>
