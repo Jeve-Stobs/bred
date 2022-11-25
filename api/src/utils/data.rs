@@ -20,7 +20,7 @@ pub fn get_data() -> serde_json::Value {
         "cclacbw027sbog",
         "psavert",
         "bamlh0a0hym2",
-        "t5yifr"
+        "t5yifr",
     ];
     let wsj_to_fetch = vec![
         "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y",

@@ -1,6 +1,5 @@
 use fred_rs::client::FredClient;
 use serde::Deserialize;
-use toml;
 
 #[derive(Debug, Deserialize)]
 struct Config {
@@ -8,12 +7,14 @@ struct Config {
 }
 
 fn read_config() -> std::io::Result<Config> {
-    let content = std::fs::read_to_string("Config.toml")?;
-    Ok(toml::from_str(&content)?)
+    let config_file = std::fs::read_to_string("config.toml")?;
+    let config: Config = toml::from_str(&config_file)?;
+    Ok(config)
 }
 
 pub fn make_client() -> FredClient {
-    let mut c = FredClient::new().unwrap();
-    c.with_key(&read_config().unwrap().fred_key);
-    c
+    let config: Config = read_config().unwrap();
+    let mut client: FredClient = FredClient::new().unwrap();
+    client.with_key(&config.fred_key);
+    return client;
 }

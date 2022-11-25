@@ -1,9 +1,8 @@
-// importation syntax
 use scraper::{Html, Selector};
 
 pub fn wsj(url: &str, selector: &str) -> String {
-    let resp = reqwest::blocking::get(url).unwrap();
-    assert!(resp.status().is_success());
+    let resp = attohttpc::get(url).send().unwrap();
+    assert!(resp.is_success());
     // get the body of the response
     let body = resp.text().unwrap();
     // parses string of HTML as a document

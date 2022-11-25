@@ -6,9 +6,7 @@ use std::{
 use actix::prelude::*;
 use actix_web_actors::ws;
 
-use bytestring::ByteString;
 use paris::{error, info};
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -27,7 +25,7 @@ const NEW_DATA_INTERVAL: Duration = Duration::from_secs(1);
 
 /// websocket connection is long running connection, it easier
 /// to handle with an actor
-pub struct MyWebSocket {
+pub struct Parrot {
     /// Client must send ping at least once per 10 seconds (CLIENT_TIMEOUT),
     /// otherwise we drop connection.
     hb: Instant,
@@ -37,7 +35,7 @@ fn string_to_static_str(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
 
-impl MyWebSocket {
+impl Parrot {
     pub fn new() -> Self {
         Self { hb: Instant::now() }
     }
@@ -66,12 +64,12 @@ impl MyWebSocket {
     fn schedule_data(&self, ctx: &mut <Self as Actor>::Context) {
         ctx.run_interval(NEW_DATA_INTERVAL, move |_, ctx| {
             let message = fs::read_to_string("./data.json").expect("Unable to read file");
-            ctx.text(ByteString::from_static(string_to_static_str(message)));
+            ctx.text(string_to_static_str(message));
         });
     }
 }
 
-impl Actor for MyWebSocket {
+impl Actor for Parrot {
     type Context = ws::WebsocketContext<Self>;
 
     /// Method is called on actor start. We start the heartbeat process here.
@@ -81,12 +79,12 @@ impl Actor for MyWebSocket {
     }
 }
 
-// impl Handler<ws::Connect> for MyWebSocket {
+// impl Handler<ws::Connect> for Parrot {
 
 // }
 
 /// Handler for `ws::Message`
-impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWebSocket {
+impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Parrot {
     fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
         // process websocket messages
         info!("WS: {:?}", msg);
