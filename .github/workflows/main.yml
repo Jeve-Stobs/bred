@@ -31,12 +31,8 @@ jobs:
 
       - name: Build app
         working-directory: api
-        run: cargo build --verbose
+        run: cargo build
 
       - name: Run app for one minute
         working-directory: api
         run: timeout 1m ./target/debug/bred-api || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
-
-      - name: Print log file
-        working-directory: api/logs
-        run: cat debug.log
