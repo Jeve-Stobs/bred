@@ -72,6 +72,11 @@ const Home: NextPage = () => {
 			</div>
 		)
 	}
+	const spreadChange =
+		data.US10Y.last -
+		data.US2Y.last -
+		(data.US10Y.last - data.US10Y.change) +
+		(data.US2Y.last - data.US2Y.change)
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
@@ -84,20 +89,14 @@ const Home: NextPage = () => {
 					<Cards
 						title="Is the yield curve negative?"
 						indicator="10Y minus 2Y:"
-						a={data.US10Y.value - data.US02Y.value}
-						b={data.US10Y.previous - data.US02Y.previous}
-						main={getFlooredFixed(
-							(data.US10Y.value - data.US02Y.value) * 100,
-							3
-						)}
-						footer={getFlooredFixed(
-							Math.abs(
-								data.US10Y.value -
-									data.US02Y.value -
-									(data.US10Y.previous - data.US02Y.previous)
-							) * 100,
-							3
-						)}
+						a={data.US10Y.last - data.US2Y.last}
+						b={
+							data.US10Y.last -
+							data.US10Y.change -
+							(data.US2Y.last - data.US2Y.change)
+						}
+						main={getFlooredFixed((data.US10Y.last - data.US2Y.last) * 100, 3)}
+						footer={getFlooredFixed(Math.abs(spreadChange * 100), 3)}
 						symbol="bps"
 						time="yesterday"
 					/>
@@ -165,10 +164,10 @@ const Home: NextPage = () => {
 					<Cards
 						title="Market expectation of near term volatility"
 						indicator="CBOE VIX:"
-						a={data.vix.value}
-						b={data.vix.previous}
-						main={data.vix.value}
-						footer={Math.abs(data.vix.value - data.vix.previous).toFixed(2)}
+						a={data.vix.last}
+						b={data.vix.last - data.vix.change}
+						main={data.vix.last}
+						footer={Math.abs(data.vix.change)}
 						symbol="bps"
 						time="yesterday"
 					/>

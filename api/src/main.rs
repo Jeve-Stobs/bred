@@ -9,7 +9,7 @@ use self::server::Parrot;
 use utils::{client, data, server};
 
 fn write_to_file() -> Result<(), Box<dyn std::error::Error>> {
-    let data = serde_json::to_string(&data::get_data()).unwrap();
+    let data = serde_json::to_string(&data::get_fred()).unwrap();
     let mut f = OpenOptions::new()
         .write(true)
         .truncate(true)

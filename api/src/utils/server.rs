@@ -6,13 +6,8 @@ use std::{
 use actix::prelude::*;
 use actix_web_actors::ws;
 
+use crate::{utils, utils::data};
 use paris::{error, info};
-use serde::{Deserialize, Serialize};
-
-#[derive(Serialize, Deserialize)]
-struct RandomInteger {
-    integer: u8,
-}
 
 /// How often heartbeat pings are sent
 const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(5);
@@ -64,7 +59,10 @@ impl Parrot {
     fn schedule_data(&self, ctx: &mut <Self as Actor>::Context) {
         ctx.run_interval(NEW_DATA_INTERVAL, move |_, ctx| {
             let message = fs::read_to_string("./data.json").expect("Unable to read file");
-            ctx.text(string_to_static_str(message));
+            let msg_to_json = serde_json::from_str(&message).unwrap();
+            let merged = utils::merge(data::get_wsj(), msg_to_json);
+
+            ctx.text(string_to_static_str(merged));
         });
     }
 }
@@ -99,7 +97,6 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Parrot {
             Ok(ws::Message::Text(text)) => {
                 ctx.text(text);
             }
-            Ok(ws::Message::Binary(bin)) => ctx.binary(bin),
             Ok(ws::Message::Close(reason)) => {
                 ctx.close(reason);
                 ctx.stop();

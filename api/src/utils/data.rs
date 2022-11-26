@@ -1,8 +1,36 @@
-use crate::utils::{fetcher, scraper};
+use crate::utils::{fetcher, structs::Welcome};
 use serde_json::json;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::{
+    collections::HashMap,
+    time::{SystemTime, UNIX_EPOCH},
+};
 
-pub fn get_data() -> serde_json::Value {
+pub fn get_wsj() -> serde_json::Value {
+    let mut params = HashMap::new();
+    params.insert("id", r#"{"application":"WSJ","instruments":[{"symbol":"BOND/BX//TMUBMUSD02Y","name":"U.S. 2 Year Treasury Note"}, {"symbol":"BOND/BX//TMUBMUSD10Y","name":"U.S. 10 Year Treasury Note"}, {"symbol": "INDEX/US//VIX", "name": "CBOE Volatility Index "}]}"#);
+    params.insert("type", "mdc_quotes");
+    let response = attohttpc::get("https://www.wsj.com/market-data")
+        .params(&params)
+        .send()
+        .unwrap();
+    let i: Welcome = response.json().unwrap();
+    return json!({
+        "US2Y": {
+            "change": i.data.instruments[0].price_change,
+            "last":    i.data.instruments[0].last_price,
+        },
+        "US10Y": {
+            "change": i.data.instruments[1].price_change,
+            "last":    i.data.instruments[1].last_price,
+        },
+        "vix": {
+            "change": i.data.instruments[2].price_change,
+            "last":    i.data.instruments[2].last_price,
+        },
+    });
+}
+
+pub fn get_fred() -> serde_json::Value {
     let to_fetch = vec![
         "unrate",
         "u6rate",
@@ -22,11 +50,6 @@ pub fn get_data() -> serde_json::Value {
         "bamlh0a0hym2",
         "t5yifr",
     ];
-    let wsj_to_fetch = vec![
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD10Y",
-        "https://www.wsj.com/market-data/quotes/bond/BX/TMUBMUSD02Y",
-        "https://www.wsj.com/market-data/quotes/index/VIX",
-    ];
     let mut obs = Vec::new();
     for i in to_fetch {
         let obs_i = fetcher::get_observations(i, "2021-01-01");
@@ -41,29 +64,7 @@ pub fn get_data() -> serde_json::Value {
         }
         values.push(v);
     }
-    // loop through wsj_to_fetch and fetch the quote_value as well as the quote_change and push them to a vector
-    let mut wsj_values = Vec::new();
-    for url in wsj_to_fetch {
-        let mut v = Vec::new();
-        let quote_value = scraper::wsj(url, "#quote_val").parse::<f64>().unwrap();
-        let quote_change = scraper::wsj(url, "#quote_change").parse::<f64>().unwrap();
-        v.push(quote_value);
-        v.push(quote_change);
-        wsj_values.push(v);
-    }
-    let data = json!({
-        "US10Y": {
-            "previous": wsj_values[0][0] - wsj_values[0][1],
-            "value": wsj_values[0][0],
-        },
-        "US02Y": {
-            "previous": wsj_values[1][0] - wsj_values[1][1],
-            "value": wsj_values[1][0],
-        },
-        "vix" : {
-            "previous": wsj_values[2][0] - wsj_values[2][1],
-            "value": wsj_values[2][0],
-        },
+    return json!({
         "unemployment": {
             "unrate": values[0][values[0].len() - 1],
             "u6rate": values[1][values[1].len() - 1],
@@ -138,5 +139,4 @@ pub fn get_data() -> serde_json::Value {
         .unwrap()
         .as_millis().to_string()
     });
-    data
 }
