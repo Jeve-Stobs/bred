@@ -1,4 +1,4 @@
-use crate::utils::{fetcher, structs::Welcome};
+use crate::utils::{fetcher, structs::Data};
 use serde_json::json;
 use std::{
     collections::HashMap,
@@ -13,19 +13,19 @@ pub fn get_wsj() -> serde_json::Value {
         .params(&params)
         .send()
         .unwrap();
-    let i: Welcome = response.json().unwrap();
+    let data: Data = response.json().unwrap();
     return json!({
         "US2Y": {
-            "change": i.data.instruments[0].price_change,
-            "last":    i.data.instruments[0].last_price,
+            "change": data.instruments[0].price_change,
+            "last":    data.instruments[0].last_price,
         },
         "US10Y": {
-            "change": i.data.instruments[1].price_change,
-            "last":    i.data.instruments[1].last_price,
+            "change": data.instruments[1].price_change,
+            "last":    data.instruments[1].last_price,
         },
         "vix": {
-            "change": i.data.instruments[2].price_change,
-            "last":    i.data.instruments[2].last_price,
+            "change": data.instruments[2].price_change,
+            "last":    data.instruments[2].last_price,
         },
     });
 }

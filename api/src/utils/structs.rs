@@ -5,7 +5,7 @@ pub struct Welcome {
     id: String,
     #[serde(rename = "type")]
     welcome_type: String,
-    pub data: Data,
+    data: Data,
     hash: String,
 }
 
