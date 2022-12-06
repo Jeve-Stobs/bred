@@ -10,6 +10,7 @@ pub fn get_wsj() -> serde_json::Value {
     params.insert("id", r#"{"application":"WSJ","instruments":[{"symbol":"BOND/BX//TMUBMUSD02Y","name":"U.S. 2 Year Treasury Note"}, {"symbol":"BOND/BX//TMUBMUSD10Y","name":"U.S. 10 Year Treasury Note"}, {"symbol": "INDEX/US//VIX", "name": "CBOE Volatility Index "}]}"#);
     params.insert("type", "mdc_quotes");
     let response = attohttpc::get("https://www.wsj.com/market-data")
+        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
         .params(&params)
         .send()
         .unwrap();
