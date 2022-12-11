@@ -30,11 +30,6 @@ async fn data_ws(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse,
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    std::panic::set_hook(Box::new(|_info| {
-        thread::sleep(Duration::from_secs(1));
-        std::process::exit(1);
-    }));
-
     thread::spawn(move || loop {
         // write data to file
         write_to_file().unwrap();

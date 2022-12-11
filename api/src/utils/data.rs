@@ -1,4 +1,4 @@
-use crate::utils::{fetcher, structs::Data};
+use crate::utils::{fetcher, structs::Welcome};
 use serde_json::json;
 use std::{
     collections::HashMap,
@@ -10,23 +10,23 @@ pub fn get_wsj() -> serde_json::Value {
     params.insert("id", r#"{"application":"WSJ","instruments":[{"symbol":"BOND/BX//TMUBMUSD02Y","name":"U.S. 2 Year Treasury Note"}, {"symbol":"BOND/BX//TMUBMUSD10Y","name":"U.S. 10 Year Treasury Note"}, {"symbol": "INDEX/US//VIX", "name": "CBOE Volatility Index "}]}"#);
     params.insert("type", "mdc_quotes");
     let response = attohttpc::get("https://www.wsj.com/market-data")
-        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
+        .header_append("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
         .params(&params)
         .send()
         .unwrap();
-    let data: Data = response.json().unwrap();
+    let w: Welcome = response.json().unwrap();
     return json!({
         "US2Y": {
-            "change": data.instruments[0].price_change,
-            "last":    data.instruments[0].last_price,
+            "change": w.data.instruments[0].price_change,
+            "last":    w.data.instruments[0].last_price,
         },
         "US10Y": {
-            "change": data.instruments[1].price_change,
-            "last":    data.instruments[1].last_price,
+            "change": w.data.instruments[1].price_change,
+            "last":    w.data.instruments[1].last_price,
         },
         "vix": {
-            "change": data.instruments[2].price_change,
-            "last":    data.instruments[2].last_price,
+            "change": w.data.instruments[2].price_change,
+            "last":    w.data.instruments[2].last_price,
         },
     });
 }

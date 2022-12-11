@@ -1,15 +1,15 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Welcome {
     id: String,
     #[serde(rename = "type")]
     welcome_type: String,
-    data: Data,
+    pub data: Data,
     hash: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Data {
     pub instruments: Vec<Instrument>,
     #[serde(rename = "latestTimestamp")]
@@ -17,7 +17,7 @@ pub struct Data {
     timestamp: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Instrument {
     #[serde(rename = "bluegrassChannel")]
     bluegrass_channel: BluegrassChannel,
@@ -48,14 +48,14 @@ pub struct Instrument {
     url: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct BluegrassChannel {
     channel: String,
     #[serde(rename = "type")]
     bluegrass_channel_type: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Bond {
     #[serde(rename = "couponRate")]
     coupon_rate: f64,
@@ -73,7 +73,7 @@ pub struct Bond {
     yield_change: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct TradePriceChange {
     display: String,
     value: String,
