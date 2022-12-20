@@ -14,9 +14,7 @@ const Home: NextPage = () => {
 	const [data, setData] = useState<any>()
 
 	useEffect(() => {
-		if (data) {
-			setData(data)
-		} else {
+		if (!data) {
 			client.onopen = () => {
 				console.log('WebSocket Client Connected')
 			}
@@ -259,12 +257,26 @@ const Home: NextPage = () => {
 						indicator="Total Assets Less Consolidation Eliminations:"
 						a={data.balancesheet.new}
 						b={data.balancesheet.old}
-						main={getNumberFormat(data.balancesheet.new)}
+						main={getNumberFormat(data.balancesheet.new, true)}
 						footer={getNumberFormat(
-							data.balancesheet.new - data.balancesheet.old
+							data.balancesheet.new - data.balancesheet.old,
+							true
 						)}
 						symbol=""
 						time="last wednesday"
+					/>
+					<Cards
+						title="How healthy is the Fed's balance sheet?"
+						indicator="Treasury remittances:"
+						a={data.remittances.new}
+						b={data.remittances.old}
+						main={getNumberFormat(data.remittances.new, false)}
+						footer={getNumberFormat(
+							data.remittances.new - data.remittances.old,
+							true
+						)}
+						symbol=""
+						time="last month"
 					/>
 					<Cards
 						title="Real GDP"
@@ -281,8 +293,11 @@ const Home: NextPage = () => {
 						indicator="Consumer Loans:"
 						a={data.consumer.new}
 						b={data.consumer.old}
-						main={getNumberFormat(data.consumer.new * 1000)}
-						footer={getNumberFormat(data.consumer.new - data.consumer.old)}
+						main={getNumberFormat(data.consumer.new * 1000, true)}
+						footer={getNumberFormat(
+							data.consumer.new - data.consumer.old,
+							true
+						)}
 						symbol=""
 						time="last week"
 					/>
@@ -365,9 +380,9 @@ function getPercentageChange(
 	return ((newNum - oldNum) / oldNum) * 100
 }
 
-function getNumberFormat(num: number) {
+function getNumberFormat(num: number, isAbsolute: boolean) {
 	return Intl.NumberFormat('en', { notation: 'compact' }).format(
-		Math.abs(num) * 1000000
+		isAbsolute ? Math.abs(num) * 1000000 : num * 1000000
 	)
 }
 

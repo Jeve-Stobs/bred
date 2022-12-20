@@ -75,6 +75,9 @@ function getClassName(a: number, b: number) {
 }
 
 function upOrDown(a: number, b: number) {
+	if (a < 0) {
+		return 'Down'
+	}
 	if (a === b) {
 		return 'UNCH'
 	}

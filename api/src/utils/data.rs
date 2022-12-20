@@ -46,6 +46,7 @@ pub fn get_fred() -> serde_json::Value {
         "recprousm156n",
         "a191rl1q225sbea",
         "walcl",
+        "resppllopnww",
         "cclacbw027sbog",
         "psavert",
         "bamlh0a0hym2",
@@ -118,22 +119,26 @@ pub fn get_fred() -> serde_json::Value {
             "new": values[12][values[12].len() - 1],
             "old": values[12][values[12].len() - 2],
         },
-        "consumer" : {
+        "remittances" : {
             "new": values[13][values[13].len() - 1],
             "old": values[13][values[13].len() - 2],
         },
-        "personal" : {
+        "consumer" : {
             "new": values[14][values[14].len() - 1],
             "old": values[14][values[14].len() - 2],
         },
-        "creditspreads":
-        {
+        "personal" : {
             "new": values[15][values[15].len() - 1],
             "old": values[15][values[15].len() - 2],
         },
-        "expectations": {
+        "creditspreads":
+        {
             "new": values[16][values[16].len() - 1],
             "old": values[16][values[16].len() - 2],
+        },
+        "expectations": {
+            "new": values[17][values[17].len() - 1],
+            "old": values[17][values[17].len() - 2],
         },
         "lastupdated": SystemTime::now()
         .duration_since(UNIX_EPOCH)

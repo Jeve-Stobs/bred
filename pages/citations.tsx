@@ -124,6 +124,13 @@ const Citations: NextPage = () => {
 						of St. Louis; https://fred.stlouisfed.org/series/T5YIFR, September
 						30, 2022.
 					</h2>
+					<h2 className={styles.citation_title}>
+						Board of Governors of the Federal Reserve System (US), Liabilities
+						and Capital: Liabilities: Earnings Remittances Due to the U.S.
+						Treasury: Wednesday Level [RESPPLLOPNWW], retrieved from FRED,
+						Federal Reserve Bank of St. Louis;
+						https://fred.stlouisfed.org/series/RESPPLLOPNWW, December 19, 2022.
+					</h2>
 				</div>
 			</main>
 		</div>
