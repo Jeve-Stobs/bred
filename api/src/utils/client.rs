@@ -8,7 +8,7 @@ struct Config {
 
 fn read_config() -> std::io::Result<Config> {
     let config_file = std::fs::read_to_string("Config.toml")?;
-    let config: Config = toml::from_str(&config_file)?;
+    let config: Config = toml::from_str(&config_file).unwrap();
     Ok(config)
 }
 

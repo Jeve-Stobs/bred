@@ -16,7 +16,6 @@ const nextConfig = withPWA({
 	swcMinify: true,
 	experimental: {
 		optimizeCss: true,
-		enableUndici: true,
 		scrollRestoration: true
 	}
 })
