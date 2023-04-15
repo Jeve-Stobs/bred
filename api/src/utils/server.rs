@@ -5,6 +5,7 @@ use std::{
 
 use actix::prelude::*;
 use actix_web_actors::ws;
+use serde_json::Value;
 
 use crate::{utils, utils::data};
 use paris::{error, info};
@@ -58,9 +59,9 @@ impl Parrot {
     /// helper method that sends new data to client every second.
     fn schedule_data(&self, ctx: &mut <Self as Actor>::Context) {
         ctx.run_interval(NEW_DATA_INTERVAL, move |_, ctx| {
-            let message = fs::read_to_string("./data.json").expect("Unable to read file");
-            let msg_to_json = serde_json::from_str(&message).unwrap();
-            let merged = utils::merge(data::get_wsj(), msg_to_json);
+            let message: String = fs::read_to_string("./data.json").expect("Unable to read file");
+            let msg_to_json: Value = serde_json::from_str(&message).unwrap();
+            let merged: String = utils::merge(data::get_wsj(), msg_to_json);
 
             ctx.text(string_to_static_str(merged));
         });

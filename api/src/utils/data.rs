@@ -1,4 +1,5 @@
 use crate::utils::{fetcher, structs::Welcome};
+use attohttpc::Response;
 use serde_json::json;
 use std::{
     collections::HashMap,
@@ -6,10 +7,10 @@ use std::{
 };
 
 pub fn get_wsj() -> serde_json::Value {
-    let mut params = HashMap::new();
+    let mut params: HashMap<&str, &str> = HashMap::new();
     params.insert("id", r#"{"application":"WSJ","instruments":[{"symbol":"BOND/BX//TMUBMUSD02Y","name":"U.S. 2 Year Treasury Note"}, {"symbol":"BOND/BX//TMUBMUSD10Y","name":"U.S. 10 Year Treasury Note"}, {"symbol": "INDEX/US//VIX", "name": "CBOE Volatility Index "}]}"#);
     params.insert("type", "mdc_quotes");
-    let response = attohttpc::get("https://www.wsj.com/market-data")
+    let response: Response = attohttpc::get("https://www.wsj.com/market-data")
         .header_append("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
         .params(&params)
         .send()
@@ -32,7 +33,7 @@ pub fn get_wsj() -> serde_json::Value {
 }
 
 pub fn get_fred() -> serde_json::Value {
-    let to_fetch = vec![
+    let to_fetch: Vec<&str> = vec![
         "unrate",
         "u6rate",
         "cpiaucsl",
@@ -54,13 +55,13 @@ pub fn get_fred() -> serde_json::Value {
     ];
     let mut obs = Vec::new();
     for i in to_fetch {
-        let obs_i = fetcher::get_observations(i, "2021-01-01");
+        let obs_i = fetcher::get_observations(i, "2022-01-01");
         obs.push(obs_i);
     }
     // push each observation in it's own vector and fetch the value
-    let mut values = Vec::new();
+    let mut values: Vec<Vec<String>> = Vec::new();
     for obs in obs {
-        let mut v = Vec::new();
+        let mut v: Vec<String> = Vec::new();
         for o in obs.observations {
             v.push(o.value);
         }

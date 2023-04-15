@@ -7,7 +7,7 @@ pub mod server;
 pub mod structs;
 
 fn merge(a: Value, b: Value) -> String {
-    let mut merged = a.clone();
+    let mut merged: Value = a.clone();
     merged
         .as_object_mut()
         .unwrap()
