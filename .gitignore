@@ -14,6 +14,7 @@
 
 # production
 /build
+/target
 /api/node_modules
 /api/data.json
 /api/logs
